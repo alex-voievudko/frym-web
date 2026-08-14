@@ -11,19 +11,15 @@ import { formatEur } from '../../lib/format';
 import type { IconName } from '../primitives/Icon.astro';
 
 const commitments: { icon: IconName; label: string; meta: string; warn?: boolean; value: number }[] = [
-	{ icon: 'home', label: 'Rent', meta: 'Due in 3 days · Aug 16', warn: true, value: 820 },
-	{ icon: 'bolt', label: 'Utilities', meta: 'Monthly', value: 180 },
-	{ icon: 'card', label: 'Subscriptions', meta: '6 active', value: 300 },
+	{ icon: 'home', label: 'Rent', meta: 'Due in 3 days · Aug 16', warn: true, value: 1100 },
+	{ icon: 'bolt', label: 'Utilities', meta: 'Monthly · Aug 21', value: 125 },
+	{ icon: 'card', label: 'Subscriptions', meta: '5 items · From Aug 18', value: 75 },
 ];
 
-// The artboard shows one bar in warning and two on track. Its own groceries
-// figure (320/380) is 84%, which the design system's own rule paints ochre
-// from 80% — so the sample is nudged below the threshold rather than
-// weakening the rule in ProgressRow.
 const plan = [
-	{ label: 'Groceries', spent: 290, planned: 380 },
-	{ label: 'Dining', spent: 188, planned: 190 },
-	{ label: 'Transport', spent: 69, planned: 100 },
+	{ label: 'Groceries', spent: 320, planned: 380 },
+	{ label: 'Dining', spent: 218, planned: 220 },
+	{ label: 'Transport', spent: 96, planned: 140 },
 ];
 ---
 
@@ -198,7 +194,7 @@ const plan = [
 		}
 	}
 
-	@media (min-width: 1024px) {
+	@media (min-width: 1200px) {
 		.states__grid {
 			grid-template-columns: repeat(3, 1fr);
 			gap: 44px;

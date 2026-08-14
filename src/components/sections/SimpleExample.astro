@@ -14,6 +14,8 @@ import type { IconName } from '../primitives/Icon.astro';
  */
 interface Scenario {
 	state: string;
+	/** The artboard spells the two spend columns out in full on mobile. */
+	stateMobile?: string;
 	rows: { label: string; value: number; tone?: 'reserved' }[];
 	free: number;
 	txn?: { icon: IconName; name: string; meta: string; tone: 'reserved' | 'negative'; value: number };
@@ -30,11 +32,12 @@ const scenarios: Scenario[] = [
 			{ label: 'Reserved', value: 180 },
 		],
 		free: 352.25,
-		caption: 'Your starting picture: what you hold, and what is already spoken for.',
+		caption: 'Where the month stands right now.',
 		emphasis: true,
 	},
 	{
-		state: 'You spend €40 on groceries',
+		state: '−€40 groceries',
+		stateMobile: 'You spend €40 on groceries',
 		rows: [
 			{ label: 'Total cash', value: 582.25 },
 			{ label: 'Locked', value: 90 },
@@ -51,7 +54,8 @@ const scenarios: Scenario[] = [
 		caption: 'Free stays the same, because the groceries were already Reserved.',
 	},
 	{
-		state: 'You spend €30 unplanned',
+		state: '−€30 unplanned',
+		stateMobile: 'You spend €30 unplanned',
 		rows: [
 			{ label: 'Total cash', value: 552.25 },
 			{ label: 'Locked', value: 90 },
@@ -81,7 +85,16 @@ const scenarios: Scenario[] = [
 		{
 			scenarios.map((s) => (
 				<li class="scenario rule-top" data-emphasis={s.emphasis || undefined}>
-					<span class="scenario__state">{s.state}</span>
+					<span class="scenario__state">
+						{s.stateMobile ? (
+							<>
+								<span class="at-mobile">{s.stateMobile}</span>
+								<span class="at-wide">{s.state}</span>
+							</>
+						) : (
+							s.state
+						)}
+					</span>
 
 					<div class="scenario__ledger">
 						{s.rows.map((r) => (
@@ -198,7 +211,7 @@ const scenarios: Scenario[] = [
 		}
 	}
 
-	@media (min-width: 1024px) {
+	@media (min-width: 1200px) {
 		.example__grid {
 			gap: 44px;
 		}

@@ -7,7 +7,13 @@ import { formatEur } from '../../lib/format';
 
 const ledger = [
 	{ label: 'In your account', value: 4000, rule: 'divider' as const },
-	{ label: 'Upcoming commitments', value: -1300, rule: 'soft' as const },
+	// Shortened on the mobile artboard.
+	{
+		label: 'Upcoming commitments',
+		labelMobile: 'Commitments',
+		value: -1300,
+		rule: 'soft' as const,
+	},
 	// Ink rule closes the arithmetic — this is the sum line.
 	{ label: 'Planned spending', value: -900, rule: 'ink' as const },
 ];
@@ -37,6 +43,7 @@ const ledger = [
 					ledger.map((row) => (
 						<DataRow
 							label={row.label}
+							labelMobile={row.labelMobile}
 							value={formatEur(row.value)}
 							height={48}
 							rule={row.rule}
@@ -91,7 +98,7 @@ const ledger = [
 		}
 	}
 
-	@media (min-width: 1024px) {
+	@media (min-width: 1200px) {
 		.balance__grid {
 			grid-template-columns: 1.06fr 0.94fr;
 			gap: 76px;

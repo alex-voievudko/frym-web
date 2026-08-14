@@ -5,15 +5,16 @@ import DataRow from '../primitives/DataRow.astro';
 import IconTile from '../primitives/IconTile.astro';
 import Badge from '../primitives/Badge.astro';
 import AllocationBar from '../primitives/AllocationBar.astro';
+import ProgressRow from '../primitives/ProgressRow.astro';
 import StatFigure from '../primitives/StatFigure.astro';
 import { formatEur } from '../../lib/format';
 
 // Members and accounts are told apart by initial, not by colour — the design
 // system limits avatar grounds to these three.
 const accounts = [
-	{ initials: 'SN', name: 'Santander', ground: 'ink', value: 622.25 },
-	{ initials: 'RV', name: 'Revolut', ground: 'green', value: 1180.0 },
-	{ initials: 'CA', name: 'Cash', ground: 'track', value: 60.0 },
+	{ initials: 'SN', name: 'Santander', ground: 'ink', value: 2850 },
+	{ initials: 'RV', name: 'Revolut', ground: 'green', value: 800 },
+	{ initials: 'CA', name: 'Cash', ground: 'track', value: 350 },
 ] as const;
 ---
 
@@ -70,7 +71,7 @@ const accounts = [
 				<DataRow label="Groceries" height={40} rule="none">
 					<Badge tone="reserved">Reserved</Badge>
 				</DataRow>
-				<span class="step__track"><span class="step__fill"></span></span>
+				<ProgressRow label="Groceries" spent={320} planned={380} />
 			</div>
 		</li>
 
@@ -169,19 +170,6 @@ const accounts = [
 		color: var(--text-primary);
 	}
 
-	.step__track {
-		display: block;
-		height: 4px;
-		background: var(--meter-track);
-	}
-
-	.step__fill {
-		display: block;
-		height: 100%;
-		width: 72%;
-		background: var(--meter-fill-secondary);
-	}
-
 	.step__free {
 		display: flex;
 		align-items: baseline;
@@ -205,7 +193,7 @@ const accounts = [
 		}
 	}
 
-	@media (min-width: 1024px) {
+	@media (min-width: 1200px) {
 		.how__grid {
 			grid-template-columns: repeat(4, 1fr);
 			gap: 36px;

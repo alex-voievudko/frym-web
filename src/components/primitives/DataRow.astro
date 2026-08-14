@@ -10,6 +10,8 @@
  */
 interface Props {
 	label: string;
+	/** Shorter wording for the mobile artboard, where the row is narrower. */
+	labelMobile?: string;
 	/** Second line under the label — due dates, categories. */
 	meta?: string;
 	metaTone?: 'secondary' | 'warning' | 'negative' | 'reserved';
@@ -24,6 +26,7 @@ interface Props {
 
 const {
 	label,
+	labelMobile,
 	meta,
 	metaTone = 'secondary',
 	value,
@@ -43,7 +46,18 @@ const {
 	<div class="row__lead">
 		<slot name="lead" />
 		<div class="row__text">
-			<span class="row__label">{label}</span>
+			<span class="row__label">
+				{
+					labelMobile ? (
+						<>
+							<span class="at-mobile">{labelMobile}</span>
+							<span class="at-wide">{label}</span>
+						</>
+					) : (
+						label
+					)
+				}
+			</span>
 			{meta && <span class="row__meta" data-tone={metaTone}>{meta}</span>}
 		</div>
 	</div>

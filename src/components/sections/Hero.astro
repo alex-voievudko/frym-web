@@ -13,16 +13,16 @@ const TOTAL = FREE + RESERVED + LOCKED;
 
 const legend = [
 	{
-		state: 'reserved',
-		title: 'Reserved',
-		meta: 'Groceries, transport, dining',
-		value: RESERVED,
-	},
-	{
 		state: 'locked',
 		title: 'Locked',
-		meta: 'Rent, bills, subscriptions',
+		meta: 'Bills · Subscriptions',
 		value: LOCKED,
+	},
+	{
+		state: 'reserved',
+		title: 'Reserved',
+		meta: 'Planned spending',
+		value: RESERVED,
 	},
 ] as const;
 ---
@@ -83,14 +83,14 @@ const legend = [
 			<div class="panel__free">
 				<p class="panel__free-labels">
 					<span class="panel__free-label">Free to spend</span>
+					{/* The artboard shortens this label on mobile. */}
 					<span class="panel__free-share">
-						{percentOf(FREE, TOTAL)}% of total cash
+						{percentOf(FREE, TOTAL)}% of<span class="at-wide"> total</span> cash
 					</span>
 				</p>
 				<StatFigure value={FREE} size="hero" />
 				<p class="panel__caption">
-					Recalculated as money comes in, commitments are paid and everyday
-					spending happens.
+					No claim on this money. Spend it, save it or leave it alone.
 				</p>
 			</div>
 		</div>
@@ -117,8 +117,8 @@ const legend = [
 
 	.hero__lead {
 		font-size: var(--type-marketing-lead);
-		line-height: 1.6;
-		max-width: 34ch;
+		line-height: 1.65;
+		max-width: 520px;
 	}
 
 	.hero__lead strong {
@@ -140,12 +140,16 @@ const legend = [
 		gap: 5px;
 		text-align: center;
 		font-family: var(--font-mono);
-		font-weight: 500;
+		font-weight: 400;
 		font-size: var(--mono-meta);
-		letter-spacing: 0.14em;
+		letter-spacing: 0.12em;
 		text-transform: uppercase;
-		line-height: 1.3;
+		line-height: 1.4;
 		color: var(--text-muted);
+	}
+
+	.hero__note span:last-child {
+		color: var(--text-faint);
 	}
 
 	/* ── panel ──────────────────────────────────────────────── */
@@ -178,7 +182,7 @@ const legend = [
 	.panel__total-value {
 		font-family: var(--font-mono);
 		font-weight: 500;
-		font-size: 0.875rem; /* 14 */
+		font-size: var(--mono-amount-md);
 		color: var(--text-primary);
 	}
 
@@ -191,7 +195,7 @@ const legend = [
 		display: flex;
 		align-items: center;
 		gap: 10px;
-		min-height: 56px;
+		min-height: 52px;
 		border-bottom: 1px solid var(--border-subtle);
 	}
 
@@ -220,8 +224,10 @@ const legend = [
 		flex: 1;
 	}
 
+	/* The mobile artboard promotes these to a full row title; from tablet up
+	   they sit back down beside the figure as a compact label. */
 	.legend__title {
-		font-size: 0.75rem; /* 12 */
+		font-size: var(--type-title-sm);
 		font-weight: 500;
 		color: var(--text-primary);
 		line-height: 1.2;
@@ -240,7 +246,7 @@ const legend = [
 	.legend__value {
 		font-family: var(--font-mono);
 		font-weight: 500;
-		font-size: 0.8125rem; /* 13 */
+		font-size: var(--mono-amount-md);
 		color: var(--text-primary);
 		flex: none;
 	}
@@ -268,20 +274,28 @@ const legend = [
 		color: var(--text-primary);
 	}
 
+	/* Meta, not a block label — 11px and less tracked than its sibling. */
 	.panel__free-share {
+		font-weight: 400;
+		font-size: var(--mono-meta);
+		letter-spacing: 0.12em;
 		color: var(--text-muted);
 		text-align: right;
 	}
 
 	.panel__caption {
-		font-size: var(--type-body-sm);
-		line-height: 1.65;
-		max-width: 42ch;
+		font-size: var(--type-body-md);
+		line-height: 1.55;
+		max-width: 340px;
 	}
 
 	@media (min-width: 768px) {
 		.hero__grid {
 			gap: 52px;
+		}
+
+		.legend__title {
+			font-size: var(--type-label-md);
 		}
 
 		.hero__cta {
@@ -295,7 +309,7 @@ const legend = [
 		}
 	}
 
-	@media (min-width: 1024px) {
+	@media (min-width: 1200px) {
 		.hero__grid {
 			grid-template-columns: 1.06fr 0.94fr;
 			gap: 76px;
