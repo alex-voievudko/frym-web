@@ -4,6 +4,28 @@
  * Deleted in the polish step. Not indexed, not linked from anywhere.
  */
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import Icon, { type IconName } from '../../components/primitives/Icon.astro';
+import IconTile from '../../components/primitives/IconTile.astro';
+import Badge from '../../components/primitives/Badge.astro';
+import PillButton from '../../components/primitives/PillButton.astro';
+import DataRow from '../../components/primitives/DataRow.astro';
+import ProgressRow from '../../components/primitives/ProgressRow.astro';
+import AllocationBar from '../../components/primitives/AllocationBar.astro';
+import StatFigure from '../../components/primitives/StatFigure.astro';
+import SectionHeader from '../../components/primitives/SectionHeader.astro';
+
+const icons: { name: IconName; use: string }[] = [
+	{ name: 'home', use: 'rent · commitments' },
+	{ name: 'bolt', use: 'utilities' },
+	{ name: 'card', use: 'subscriptions' },
+	{ name: 'bag', use: 'groceries' },
+	{ name: 'box', use: 'shopping' },
+	{ name: 'coin', use: 'free to spend' },
+	{ name: 'wallet', use: 'accounts' },
+	{ name: 'calendar', use: 'monthly plan' },
+	{ name: 'transfer', use: 'transactions' },
+	{ name: 'bars', use: 'monthly overview' },
+];
 
 const typeScale = [
 	['--fs-h1', 'h1 hero', '40 → 76'],
@@ -132,6 +154,95 @@ const palette = [
 			</p>
 		</div>
 
+		<h2 class="kit__h">Icons — Hugeicons free (stroke-rounded)</h2>
+		<ul class="icons">
+			{
+				icons.map((i) => (
+					<li>
+						<span class="icons__row">
+							<Icon name={i.name} size={18} />
+							<Icon name={i.name} size={16} />
+							<Icon name={i.name} size={14} />
+							<IconTile name={i.name} size={34} />
+						</span>
+						<span class="icons__name mono">{i.name}</span>
+						<span class="icons__use mono">{i.use}</span>
+					</li>
+				))
+			}
+		</ul>
+
+		<h2 class="kit__h">Buttons</h2>
+		<div class="cluster">
+			<PillButton size="sm">Join waitlist</PillButton>
+			<PillButton size="md">Join the waitlist</PillButton>
+			<PillButton size="lg">Join the waitlist</PillButton>
+			<PillButton size="lg" variant="outline">Secondary</PillButton>
+			<PillButton size="lg" disabled>Disabled</PillButton>
+		</div>
+		<div class="cluster cluster--dark on-dark">
+			<PillButton size="lg" variant="light">Join the waitlist</PillButton>
+		</div>
+
+		<h2 class="kit__h">Badges</h2>
+		<div class="cluster">
+			<Badge tone="neutral">Locked</Badge>
+			<Badge tone="reserved">Reserved</Badge>
+			<Badge tone="reserved">No claim</Badge>
+			<Badge tone="warning">Due in 3 days</Badge>
+			<Badge tone="negative">Over €26</Badge>
+		</div>
+
+		<h2 class="kit__h">Allocation bar</h2>
+		<div class="stack" style="max-width:460px">
+			<AllocationBar free={1800} reserved={900} locked={1300} height={14} />
+			<AllocationBar free={1800} reserved={900} locked={1300} height={10} />
+		</div>
+
+		<h2 class="kit__h">Figures</h2>
+		<div class="stack">
+			<StatFigure value={1800} size="hero" />
+			<StatFigure value={1800} size="lg" />
+			<StatFigure value={352.25} size="md" />
+			<StatFigure value={1800} size="sm" />
+		</div>
+
+		<h2 class="kit__h">Data rows — heights 40 / 48 / 52 / 56 / 60</h2>
+		<div class="stack" style="max-width:460px">
+			<DataRow label="In your account" value="€4.000,00" height={48} rule="divider" />
+			<DataRow label="Upcoming commitments" value="−€1.300,00" height={48} />
+			<DataRow label="Planned spending" value="−€900,00" height={48} rule="ink" />
+			<DataRow label="Genuinely free" height={60} rule="none" strong>
+				<StatFigure value={1800} size="lg" />
+			</DataRow>
+			<DataRow
+				label="Rent"
+				meta="Due in 3 days · Aug 16"
+				metaTone="warning"
+				value="€820,00"
+				height={56}
+			>
+				<IconTile slot="lead" name="home" size={30} />
+			</DataRow>
+			<DataRow label="Free" height={52} rule="none" strong>
+				<Badge tone="reserved">No claim</Badge>
+				<StatFigure value={352.25} size="md" />
+			</DataRow>
+		</div>
+
+		<h2 class="kit__h">Progress rows</h2>
+		<div class="stack" style="max-width:460px">
+			<ProgressRow label="Groceries" spent={320} planned={380} />
+			<ProgressRow label="Dining" spent={188} planned={190} />
+			<ProgressRow label="Transport" spent={69} planned={100} />
+		</div>
+
+		<h2 class="kit__h">Section header</h2>
+		<SectionHeader eyebrow="Three simple states" title="See where your money really stands.">
+			Frym continually updates these numbers as money comes in and everyday
+			spending happens.
+		</SectionHeader>
+
 		<h2 class="kit__h">Palette</h2>
 		<ul class="swatches">
 			{
@@ -250,6 +361,56 @@ const palette = [
 		display: flex;
 		flex-direction: column;
 		gap: var(--s-5);
+	}
+
+	.cluster {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		gap: var(--s-3);
+	}
+
+	.cluster--dark {
+		background: var(--c-dark-bg);
+		padding: var(--s-4);
+	}
+
+	.stack {
+		display: flex;
+		flex-direction: column;
+		gap: var(--s-4);
+		align-items: flex-start;
+	}
+
+	.icons {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+		gap: var(--s-5);
+	}
+
+	.icons li {
+		display: flex;
+		flex-direction: column;
+		gap: var(--s-2);
+	}
+
+	.icons__row {
+		display: flex;
+		align-items: center;
+		gap: var(--s-3);
+		color: var(--c-ink);
+	}
+
+	.icons__name {
+		font-size: var(--fs-mono-xs);
+		letter-spacing: 0.12em;
+		color: var(--c-ink);
+	}
+
+	.icons__use {
+		font-size: var(--fs-mono-xs);
+		letter-spacing: 0.12em;
+		color: var(--c-secondary);
 	}
 
 	.swatches {

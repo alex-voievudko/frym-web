@@ -1,0 +1,35 @@
+---
+import Icon, { type IconName } from './Icon.astro';
+
+/** Rounded tile holding a glyph — "anything that holds an icon is a tile". */
+interface Props {
+	name: IconName;
+	/** Tile edge in px. 34 in the features grid, 30 on mobile rows and chips. */
+	size?: number;
+	class?: string;
+}
+
+const { name, size = 34, class: className } = Astro.props;
+---
+
+<span
+	class:list={['tile', className]}
+	style={`--tile:${size}px`}
+	aria-hidden="true"
+>
+	<Icon {name} size={Math.round(size * 0.47)} />
+</span>
+
+<style>
+	.tile {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		flex: none;
+		width: var(--tile);
+		height: var(--tile);
+		border-radius: var(--r-tile);
+		background: var(--c-track);
+		color: var(--c-ink);
+	}
+</style>

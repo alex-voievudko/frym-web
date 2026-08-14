@@ -1,0 +1,62 @@
+---
+import { Icon as Iconify } from 'astro-icon/components';
+
+/**
+ * SWAP POINT for iconography.
+ *
+ * Call sites use semantic names (`wallet`, `bolt`) and never a `hugeicons:*`
+ * id, so the icon set can be re-pointed — or the whole astro-icon dependency
+ * dropped for @iconify/utils — by editing this file alone.
+ *
+ * The free Hugeicons stroke-rounded set draws with stroke-width 1.5 against
+ * the artboards' 1.6; at 14–18px that is well under a device pixel, so it is
+ * left alone. Icons inherit `currentColor`, which the artboards' hardcoded
+ * ink could not do — that matters inside the dark waitlist band.
+ */
+const MAP = {
+	// Chosen against the artboard glyphs side by side. `home-03` is the plain
+	// gabled house the artboard draws (`home-01` is a squircle with a smile);
+	// `shopping-bag-01` keeps the handle; `cash-01` is a single disc rather
+	// than the stack `coins-01` draws.
+	home: 'hugeicons:home-03',
+	bolt: 'hugeicons:flash',
+	card: 'hugeicons:credit-card',
+	bag: 'hugeicons:shopping-bag-01',
+	box: 'hugeicons:package',
+	coin: 'hugeicons:cash-01',
+	wallet: 'hugeicons:wallet-01',
+	calendar: 'hugeicons:calendar-03',
+	transfer: 'hugeicons:arrow-data-transfer-horizontal',
+	bars: 'hugeicons:chart-bar-line',
+} as const;
+
+export type IconName = keyof typeof MAP;
+
+interface Props {
+	name: IconName;
+	size?: number;
+	/** Give a label only when the icon carries meaning no nearby text does. */
+	label?: string;
+	class?: string;
+}
+
+const { name, size = 16, label, class: className } = Astro.props;
+
+const a11y = label
+	? ({ title: label, role: 'img' } as const)
+	: ({ 'aria-hidden': 'true', focusable: 'false' } as const);
+---
+
+<Iconify
+	name={MAP[name]}
+	width={size}
+	height={size}
+	class:list={['icon', className]}
+	{...a11y}
+/>
+
+<style>
+	.icon {
+		flex: none;
+	}
+</style>

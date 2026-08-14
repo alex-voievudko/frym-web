@@ -1,0 +1,48 @@
+---
+/**
+ * State tag: tint ground, semantic label, no border. Radius 3 is the one
+ * non-pill radius in the system, so tags never read as pressable.
+ */
+interface Props {
+	tone?: 'neutral' | 'reserved' | 'warning' | 'negative';
+	class?: string;
+}
+
+const { tone = 'neutral', class: className } = Astro.props;
+---
+
+<span class:list={['badge', className]} data-tone={tone}><slot /></span>
+
+<style>
+	.badge {
+		display: inline-flex;
+		align-items: center;
+		flex: none;
+		border-radius: var(--r-tag);
+		padding: 3px 7px;
+		font-family: var(--font-mono);
+		font-weight: 500;
+		font-size: var(--fs-mono-xs);
+		letter-spacing: 0.12em;
+		text-transform: uppercase;
+		line-height: 1.2;
+		white-space: nowrap;
+	}
+
+	.badge[data-tone='neutral'] {
+		background: var(--c-track);
+		color: var(--c-body);
+	}
+	.badge[data-tone='reserved'] {
+		background: var(--c-green-pale);
+		color: var(--c-green-dark);
+	}
+	.badge[data-tone='warning'] {
+		background: var(--c-ochre-tint);
+		color: var(--c-ochre);
+	}
+	.badge[data-tone='negative'] {
+		background: var(--c-brick-tint);
+		color: var(--c-brick);
+	}
+</style>

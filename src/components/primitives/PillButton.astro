@@ -14,6 +14,8 @@ interface Props {
 	/** Full-width below 768, matching the mobile artboard's block buttons. */
 	block?: boolean;
 	type?: 'button' | 'submit';
+	/** Button form only — a disabled link is not a thing. */
+	disabled?: boolean;
 	class?: string;
 	id?: string;
 }
@@ -24,12 +26,13 @@ const {
 	size = 'md',
 	block = false,
 	type = 'button',
+	disabled = false,
 	class: className,
 	id,
 } = Astro.props;
 
 const Tag = href ? 'a' : 'button';
-const tagProps = href ? { href } : { type };
+const tagProps = href ? { href } : { type, disabled };
 ---
 
 <Tag

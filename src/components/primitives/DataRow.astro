@@ -1,0 +1,153 @@
+---
+/**
+ * A ledger row: mono label left, mono amount right, fixed height, hairline
+ * underneath. The artboards use heights 40/48/52/56/60 and promote the rule
+ * to ink where a row acts as a sum line.
+ *
+ * Amounts here are Mono, not Sans — the design system reserves Mono for
+ * amounts inside rows "where columns must align". Use StatFigure for the
+ * figure that answers a question.
+ */
+interface Props {
+	label: string;
+	/** Second line under the label — due dates, categories. */
+	meta?: string;
+	metaTone?: 'secondary' | 'warning' | 'negative' | 'reserved';
+	/** Rendered as the mono amount when no default slot is supplied. */
+	value?: string;
+	height?: number;
+	rule?: 'none' | 'soft' | 'divider' | 'ink';
+	/** Ink label instead of the muted default, for totals. */
+	strong?: boolean;
+	class?: string;
+}
+
+const {
+	label,
+	meta,
+	metaTone = 'secondary',
+	value,
+	height = 48,
+	rule = 'soft',
+	strong = false,
+	class: className,
+} = Astro.props;
+---
+
+<div
+	class:list={['row', className]}
+	style={`--row-h:${height}px`}
+	data-rule={rule}
+	data-strong={strong || undefined}
+>
+	<div class="row__lead">
+		<slot name="lead" />
+		<div class="row__text">
+			<span class="row__label">{label}</span>
+			{meta && <span class="row__meta" data-tone={metaTone}>{meta}</span>}
+		</div>
+	</div>
+
+	<div class="row__value">
+		{value ? <span class="row__amount tnum">{value}</span> : <slot />}
+	</div>
+</div>
+
+<style>
+	.row {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: var(--s-4);
+		min-height: var(--row-h);
+	}
+
+	.row[data-rule='soft'] {
+		border-bottom: 1px solid var(--c-divider-soft);
+	}
+	.row[data-rule='divider'] {
+		border-bottom: 1px solid var(--c-divider);
+	}
+	.row[data-rule='ink'] {
+		border-bottom: 1px solid var(--c-ink);
+	}
+
+	.row__lead {
+		display: flex;
+		align-items: center;
+		gap: 10px;
+		min-width: 0;
+	}
+
+	.row__text {
+		display: flex;
+		flex-direction: column;
+		gap: 4px;
+		min-width: 0;
+	}
+
+	.row__label {
+		font-family: var(--font-mono);
+		font-weight: 400;
+		font-size: var(--fs-mono-label);
+		letter-spacing: 0.14em;
+		text-transform: uppercase;
+		color: var(--c-secondary);
+		line-height: 1.2;
+	}
+
+	.row[data-strong] .row__label {
+		font-weight: 500;
+		letter-spacing: 0.2em;
+		color: var(--c-ink);
+	}
+
+	.row__meta {
+		font-family: var(--font-mono);
+		font-weight: 400;
+		font-size: var(--fs-mono-xs);
+		letter-spacing: 0.12em;
+		text-transform: uppercase;
+		line-height: 1.2;
+	}
+
+	.row__meta[data-tone='secondary'] {
+		color: var(--c-secondary);
+	}
+	.row__meta[data-tone='warning'] {
+		color: var(--c-ochre);
+	}
+	.row__meta[data-tone='negative'] {
+		color: var(--c-brick);
+	}
+	.row__meta[data-tone='reserved'] {
+		color: var(--c-green-dark);
+	}
+
+	.row__value {
+		display: flex;
+		align-items: center;
+		gap: var(--s-2);
+		flex: none;
+	}
+
+	.row__amount {
+		font-family: var(--font-mono);
+		font-weight: 500;
+		font-size: var(--fs-mono-amount, 0.8438rem); /* 13.5 */
+		color: var(--c-ink);
+		line-height: 1;
+	}
+
+	/* On the dark band the row colours invert. */
+	:global(.on-dark) .row[data-rule='soft'] {
+		border-bottom-color: var(--c-dark-rule);
+	}
+	:global(.on-dark) .row__label {
+		color: var(--c-dark-body);
+	}
+	:global(.on-dark) .row[data-strong] .row__label,
+	:global(.on-dark) .row__amount {
+		color: var(--c-dark-text);
+	}
+</style>

@@ -1,0 +1,72 @@
+---
+import { percentOf } from '../../lib/format';
+
+/**
+ * The stacked Free / Reserved / Locked meter — the product's signature
+ * visual. Three solid segments with a 2px gap and square corners, per the
+ * design system's meter spec.
+ */
+interface Props {
+	free: number;
+	reserved: number;
+	locked: number;
+	/** 14px is the section-level bar, 10px the inline one inside step 04. */
+	height?: 10 | 14;
+	class?: string;
+}
+
+const { free, reserved, locked, height = 14, class: className } = Astro.props;
+
+const total = free + reserved + locked;
+const segments = [
+	{ key: 'free', label: 'Free', value: free },
+	{ key: 'reserved', label: 'Reserved', value: reserved },
+	{ key: 'locked', label: 'Locked', value: locked },
+] as const;
+
+const summary = segments
+	.map((s) => `${s.label} ${percentOf(s.value, total)}%`)
+	.join(', ');
+---
+
+<div
+	class:list={['bar', className]}
+	style={`--bar-h:${height}px`}
+	role="img"
+	aria-label={`Allocation: ${summary}`}
+>
+	{
+		segments.map((s) => (
+			<span
+				class="bar__seg"
+				data-state={s.key}
+				style={`flex-basis:${(s.value / total) * 100}%`}
+			/>
+		))
+	}
+</div>
+
+<style>
+	.bar {
+		display: flex;
+		gap: 2px;
+		height: var(--bar-h);
+		width: 100%;
+	}
+
+	.bar__seg {
+		flex-grow: 0;
+		flex-shrink: 1;
+		min-width: 0;
+	}
+
+	.bar__seg[data-state='free'] {
+		background: var(--c-free);
+	}
+	.bar__seg[data-state='reserved'] {
+		background: var(--c-reserved);
+	}
+	.bar__seg[data-state='locked'] {
+		background: var(--c-locked);
+	}
+</style>

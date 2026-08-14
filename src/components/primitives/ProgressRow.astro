@@ -1,0 +1,91 @@
+---
+/**
+ * Category plan progress: label, square 4px track, and a `spent / planned`
+ * fraction whose denominator is faint. Tone follows the design system —
+ * green on track, ochre from 80%, brick past 100 (clamped).
+ */
+interface Props {
+	label: string;
+	spent: number;
+	planned: number;
+	class?: string;
+}
+
+const { label, spent, planned, class: className } = Astro.props;
+
+const ratio = planned === 0 ? 0 : spent / planned;
+const pct = Math.min(ratio, 1) * 100;
+const tone = ratio > 1 ? 'negative' : ratio >= 0.8 ? 'warning' : 'ok';
+---
+
+<div class:list={['prow', className]}>
+	<span class="prow__label">{label}</span>
+	<span
+		class="prow__track"
+		role="img"
+		aria-label={`${label}: ${spent} of ${planned} planned`}
+	>
+		<span class="prow__fill" data-tone={tone} style={`width:${pct}%`}></span>
+	</span>
+	<span class="prow__fraction tnum" aria-hidden="true">
+		{spent}<span class="prow__denominator">&nbsp;/ {planned}</span>
+	</span>
+</div>
+
+<style>
+	.prow {
+		display: flex;
+		align-items: center;
+		gap: var(--s-3);
+	}
+
+	.prow__label {
+		flex: none;
+		width: 72px;
+		font-family: var(--font-mono);
+		font-weight: 400;
+		font-size: var(--fs-mono-label);
+		letter-spacing: 0.12em;
+		text-transform: uppercase;
+		color: var(--c-secondary);
+		line-height: 1;
+	}
+
+	/* Meters are square — the design system exempts them from the radius scale. */
+	.prow__track {
+		flex: 1;
+		min-width: 0;
+		height: 4px;
+		background: var(--c-track);
+	}
+
+	.prow__fill {
+		display: block;
+		height: 100%;
+	}
+
+	.prow__fill[data-tone='ok'] {
+		background: var(--c-green-light);
+	}
+	.prow__fill[data-tone='warning'] {
+		background: var(--c-ochre);
+	}
+	.prow__fill[data-tone='negative'] {
+		background: var(--c-brick);
+	}
+
+	.prow__fraction {
+		flex: none;
+		width: 74px;
+		text-align: right;
+		font-family: var(--font-mono);
+		font-weight: 400;
+		font-size: 0.6875rem; /* 11 */
+		color: var(--c-ink);
+		line-height: 1;
+	}
+
+	.prow__denominator {
+		color: var(--c-faint);
+	}
+</style>

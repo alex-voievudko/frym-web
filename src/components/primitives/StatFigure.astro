@@ -1,0 +1,80 @@
+---
+import { splitEur, formatEur } from '../../lib/format';
+
+/**
+ * A money figure set in Instrument Sans — the design system reserves Sans for
+ * "every figure that is the answer to a question", with Mono for amounts that
+ * sit inside aligned rows (see DataRow).
+ */
+interface Props {
+	value: number;
+	/** hero is the one-per-page Free figure; the rest are section sums. */
+	size?: 'hero' | 'lg' | 'md' | 'sm';
+	sign?: 'auto' | 'always' | 'never';
+	/** Drop the cents span entirely (some artboard figures show none). */
+	cents?: boolean;
+	class?: string;
+}
+
+const {
+	value,
+	size = 'md',
+	sign = 'auto',
+	cents = true,
+	class: className,
+} = Astro.props;
+
+const parts = splitEur(value, { sign });
+---
+
+<span
+	class:list={['figure', 'tnum', className]}
+	data-size={size}
+	aria-label={formatEur(value, { sign })}
+>
+	<span aria-hidden="true">{parts.whole}</span>
+	{cents && <span class="figure__cents" aria-hidden="true">{parts.cents}</span>}
+</span>
+
+<style>
+	.figure {
+		/* The design system states cents sit at ~44% of the figure size. */
+		--cents: 0.44em;
+		font-family: var(--font-sans);
+		font-weight: 600;
+		color: var(--c-ink);
+		line-height: 1;
+		white-space: nowrap;
+	}
+
+	.figure__cents {
+		font-size: var(--cents);
+		letter-spacing: -0.03em;
+		color: var(--c-faint);
+	}
+
+	.figure[data-size='hero'] {
+		font-size: var(--fs-figure);
+		line-height: 0.9;
+		letter-spacing: -0.055em;
+	}
+
+	/* Below the hero the artboards set cents at half the figure, not 44%. */
+	.figure[data-size='lg'] {
+		--cents: 0.5em;
+		font-size: clamp(1.5rem, 1.3143rem + 0.7619vw, 1.875rem); /* 24 → 30 */
+		letter-spacing: -0.04em;
+	}
+
+	.figure[data-size='md'] {
+		--cents: 0.5em;
+		font-size: clamp(1.375rem, 1.2821rem + 0.381vw, 1.625rem); /* 22 → 26 */
+		letter-spacing: -0.04em;
+	}
+
+	.figure[data-size='sm'] {
+		--cents: 0.5em;
+		font-size: 1.25rem; /* 20 */
+		letter-spacing: -0.035em;
+	}
+</style>

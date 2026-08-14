@@ -1,0 +1,82 @@
+---
+/** Temporary. Deleted with the rest of /dev in the polish step. */
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Icon, { type IconName } from '../../components/primitives/Icon.astro';
+import IconTile from '../../components/primitives/IconTile.astro';
+
+const icons: { name: IconName; use: string }[] = [
+	{ name: 'home', use: 'rent · commitments' },
+	{ name: 'bolt', use: 'utilities' },
+	{ name: 'card', use: 'subscriptions' },
+	{ name: 'bag', use: 'groceries' },
+	{ name: 'box', use: 'shopping' },
+	{ name: 'coin', use: 'free to spend' },
+	{ name: 'wallet', use: 'accounts' },
+	{ name: 'calendar', use: 'monthly plan' },
+	{ name: 'transfer', use: 'transactions' },
+	{ name: 'bars', use: 'monthly overview' },
+];
+---
+
+<BaseLayout title="Frym — icons" noindex bare>
+	<div class="wrap">
+		<ul class="icons">
+			{
+				icons.map((i) => (
+					<li>
+						<span class="row">
+							<Icon name={i.name} size={24} />
+							<Icon name={i.name} size={18} />
+							<Icon name={i.name} size={16} />
+							<Icon name={i.name} size={14} />
+							<IconTile name={i.name} size={34} />
+							<IconTile name={i.name} size={30} />
+						</span>
+						<span class="name">{i.name}</span>
+						<span class="use">{i.use}</span>
+					</li>
+				))
+			}
+		</ul>
+	</div>
+</BaseLayout>
+
+<style>
+	.wrap {
+		padding: var(--s-5);
+	}
+
+	.icons {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		gap: var(--s-5) var(--s-7);
+	}
+
+	.icons li {
+		display: flex;
+		flex-direction: column;
+		gap: 6px;
+	}
+
+	.row {
+		display: flex;
+		align-items: center;
+		gap: var(--s-4);
+		color: var(--c-ink);
+	}
+
+	.name,
+	.use {
+		font-family: var(--font-mono);
+		font-size: var(--fs-mono-xs);
+		letter-spacing: 0.12em;
+		text-transform: uppercase;
+	}
+
+	.name {
+		color: var(--c-ink);
+	}
+	.use {
+		color: var(--c-secondary);
+	}
+</style>

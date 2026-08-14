@@ -1,0 +1,99 @@
+---
+/**
+ * Mono eyebrow above a display heading — the opening of every section.
+ * The optional default slot is the note that sits opposite the heading in
+ * the "Three simple states" and "How Frym works" sections.
+ */
+interface Props {
+	eyebrow: string;
+	title: string;
+	/** Matches the heading to its section for aria-labelledby. */
+	id?: string;
+	/** Picks the display size; sections differ. */
+	size?: 'default' | 'faq' | 'next' | 'waitlist' | 'cta';
+	/** The Free card's eyebrow is ink rather than muted. */
+	eyebrowTone?: 'muted' | 'ink';
+	class?: string;
+}
+
+const {
+	eyebrow,
+	title,
+	id,
+	size = 'default',
+	eyebrowTone = 'muted',
+	class: className,
+} = Astro.props;
+
+const hasNote = Astro.slots.has('default');
+---
+
+<div class:list={['head', className]} data-has-note={hasNote || undefined}>
+	<div class="head__main">
+		<p class:list={['eyebrow', { 'eyebrow--ink': eyebrowTone === 'ink' }]}>
+			{eyebrow}
+		</p>
+		<h2 {id} class="head__title" data-size={size}>{title}</h2>
+	</div>
+
+	{
+		hasNote && (
+			<div class="head__note">
+				<slot />
+			</div>
+		)
+	}
+</div>
+
+<style>
+	.head {
+		display: flex;
+		flex-direction: column;
+		gap: var(--s-6);
+	}
+
+	.head__main {
+		display: flex;
+		flex-direction: column;
+		gap: var(--s-5);
+	}
+
+	.head__title {
+		line-height: var(--lh-h2);
+		letter-spacing: var(--tr-h2);
+		max-width: 18ch;
+	}
+
+	.head__title[data-size='default'] {
+		font-size: var(--fs-h2);
+	}
+	.head__title[data-size='faq'] {
+		font-size: var(--fs-h2-faq);
+	}
+	.head__title[data-size='next'] {
+		font-size: var(--fs-h2-next);
+	}
+	.head__title[data-size='waitlist'] {
+		font-size: var(--fs-h2-waitlist);
+	}
+	.head__title[data-size='cta'] {
+		font-size: var(--fs-h2-cta);
+		max-width: 22ch;
+	}
+
+	.head__note {
+		font-size: var(--fs-caption);
+		line-height: 1.7;
+		max-width: 300px;
+	}
+
+	@media (min-width: 1024px) {
+		/* The note sits opposite the heading, baseline-aligned to it. */
+		.head[data-has-note] {
+			flex-direction: row;
+			align-items: flex-end;
+			justify-content: space-between;
+			gap: 60px;
+		}
+	}
+</style>
