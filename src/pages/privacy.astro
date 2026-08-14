@@ -1,0 +1,74 @@
+---
+import LegalLayout from '../layouts/LegalLayout.astro';
+import { site } from '../lib/site';
+
+// PLACEHOLDER. Written to describe what the waitlist page actually does, so
+// it is accurate today, but it is not legal advice and has not been reviewed.
+// Replace before launch.
+---
+
+<LegalLayout
+	title="Privacy Policy"
+	description="How Frym handles the information you give us when you join the waitlist."
+	updated="14 August 2026"
+>
+	<p>
+		This page explains what Frym collects while it is in pre-launch, and what we
+		do with it. Frym is not yet available, and this site does not offer a
+		product or an account.
+	</p>
+
+	<section>
+		<h2>What we collect</h2>
+		<p>
+			If you join the waitlist, we store the email address you give us and, if
+			you provide one, your first name. If you answer the optional question
+			after signing up, we store your answer alongside your email address.
+		</p>
+		<p>
+			We do not run advertising trackers on this site, and we do not sell or
+			share what you give us.
+		</p>
+	</section>
+
+	<section>
+		<h2>Why we collect it</h2>
+		<ul>
+			<li>To tell you when early access opens.</li>
+			<li>To send occasional updates about how Frym is coming along.</li>
+			<li>
+				To understand which problems people most want solved, so we build the
+				right first version.
+			</li>
+		</ul>
+	</section>
+
+	<section>
+		<h2>How long we keep it</h2>
+		<p>
+			Until Frym launches and you have had the chance to take up early access,
+			or until you ask us to remove it — whichever comes first.
+		</p>
+	</section>
+
+	<section>
+		<h2>Your choices</h2>
+		<p>
+			You can ask us to send you a copy of what we hold, correct it, or delete
+			it. Email <a href={`mailto:${site.contactEmail}`}>{site.contactEmail}</a>
+			and we will action it.
+		</p>
+		<p>
+			Every update we send includes an unsubscribe link. Unsubscribing removes
+			you from the waitlist.
+		</p>
+	</section>
+
+	<section>
+		<h2>Changes</h2>
+		<p>
+			If this policy changes in a way that affects people already on the
+			waitlist, we will say so in an email rather than only updating this page.
+		</p>
+	</section>
+</LegalLayout>

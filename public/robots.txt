@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://frym.app/sitemap-index.xml

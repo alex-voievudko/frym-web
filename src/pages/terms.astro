@@ -1,0 +1,66 @@
+---
+import LegalLayout from '../layouts/LegalLayout.astro';
+import { site } from '../lib/site';
+
+// PLACEHOLDER. Accurate about what this site currently is, but not legal
+// advice and not reviewed. Replace before launch.
+---
+
+<LegalLayout
+	title="Terms"
+	description="The terms that apply to the Frym pre-launch site and waitlist."
+	updated="14 August 2026"
+>
+	<p>
+		These terms cover this website and the Frym waitlist. They do not cover the
+		Frym app, which does not exist yet — separate terms will apply when it does.
+	</p>
+
+	<section>
+		<h2>What this site is</h2>
+		<p>
+			A pre-launch page describing a product we are building. Nothing here is
+			an offer to supply a service, and nothing here is financial advice. The
+			figures shown are illustrative examples, not real balances.
+		</p>
+	</section>
+
+	<section>
+		<h2>The waitlist</h2>
+		<p>
+			Joining the waitlist reserves nothing and costs nothing. It does not
+			guarantee access, a price, or a launch date. We may close the waitlist,
+			change what early access includes, or decide not to launch at all.
+		</p>
+		<p>
+			Please use an email address you are entitled to use, and do not attempt
+			to sign up automatically or in bulk.
+		</p>
+	</section>
+
+	<section>
+		<h2>Our content</h2>
+		<p>
+			The Frym name, wording and design on this site belong to us. You are
+			welcome to link to this page or quote it in commentary; please do not
+			republish it as your own.
+		</p>
+	</section>
+
+	<section>
+		<h2>Availability</h2>
+		<p>
+			This is a pre-launch site. It may be taken down, changed or rebuilt
+			without notice, and we do not promise it will be available at any given
+			moment.
+		</p>
+	</section>
+
+	<section>
+		<h2>Getting in touch</h2>
+		<p>
+			Questions about these terms go to
+			<a href={`mailto:${site.contactEmail}`}>{site.contactEmail}</a>.
+		</p>
+	</section>
+</LegalLayout>
