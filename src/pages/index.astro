@@ -1,6 +1,5 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import Section from '../components/primitives/Section.astro';
 import Hero from '../components/sections/Hero.astro';
 import BalanceNotBudget from '../components/sections/BalanceNotBudget.astro';
 import ThreeStates from '../components/sections/ThreeStates.astro';
@@ -9,6 +8,7 @@ import SimpleExample from '../components/sections/SimpleExample.astro';
 import WhyFrym from '../components/sections/WhyFrym.astro';
 import Features from '../components/sections/Features.astro';
 import WhatComesNext from '../components/sections/WhatComesNext.astro';
+import Waitlist from '../components/sections/Waitlist.astro';
 import Faq from '../components/sections/Faq.astro';
 import ClosingCta from '../components/sections/ClosingCta.astro';
 ---
@@ -22,9 +22,7 @@ import ClosingCta from '../components/sections/ClosingCta.astro';
 	<WhyFrym />
 	<Features />
 	<WhatComesNext />
-	<Section id="waitlist" tint="dark" pad="waitlist">
-		<h2>Want to try Frym early?</h2>
-	</Section>
+	<Waitlist />
 	<Faq />
 	<ClosingCta />
 </BaseLayout>

@@ -13,6 +13,7 @@ import SimpleExample from '../../../components/sections/SimpleExample.astro';
 import WhyFrym from '../../../components/sections/WhyFrym.astro';
 import Features from '../../../components/sections/Features.astro';
 import WhatComesNext from '../../../components/sections/WhatComesNext.astro';
+import Waitlist from '../../../components/sections/Waitlist.astro';
 import Faq from '../../../components/sections/Faq.astro';
 import ClosingCta from '../../../components/sections/ClosingCta.astro';
 
@@ -25,6 +26,7 @@ const sections = {
 	why: WhyFrym,
 	features: Features,
 	next: WhatComesNext,
+	waitlist: Waitlist,
 	faq: Faq,
 	closing: ClosingCta,
 };
@@ -39,6 +41,7 @@ export function getStaticPaths() {
 		'why',
 		'features',
 		'next',
+		'waitlist',
 		'faq',
 		'closing',
 	].map((section) => ({ params: { section } }));

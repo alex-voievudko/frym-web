@@ -1,0 +1,88 @@
+---
+import Section from '../primitives/Section.astro';
+import WaitlistForm from '../waitlist/WaitlistForm.astro';
+
+const benefits = [
+	'Early access when Frym is ready',
+	'Product updates as we build',
+	'A chance to test features before launch',
+];
+---
+
+<Section
+	id="waitlist"
+	tint="dark"
+	pad="waitlist"
+	labelledby="waitlist-title"
+	class="waitlist"
+>
+	<div class="waitlist__grid">
+		<div class="waitlist__copy">
+			<h2 class="waitlist__title" id="waitlist-title">Want to try Frym early?</h2>
+
+			<p class="waitlist__lead">
+				We are building the first version now. Join the waitlist to get:
+			</p>
+
+			<ul class="waitlist__benefits">
+				{benefits.map((b) => <li class="waitlist__benefit">{b}</li>)}
+			</ul>
+		</div>
+
+		<WaitlistForm />
+	</div>
+</Section>
+
+<style>
+	.waitlist__grid {
+		display: grid;
+		gap: var(--s-7);
+	}
+
+	.waitlist__copy {
+		display: flex;
+		flex-direction: column;
+		gap: var(--s-4);
+	}
+
+	.waitlist__title {
+		font-size: var(--fs-h2-waitlist);
+		line-height: 1.06;
+		letter-spacing: -0.05em;
+		color: var(--c-dark-text);
+	}
+
+	.waitlist__lead {
+		font-size: var(--fs-lead-sm);
+		line-height: 1.7;
+		color: var(--c-dark-body);
+	}
+
+	.waitlist__benefits {
+		display: flex;
+		flex-direction: column;
+		border-top: 1px solid var(--c-dark-rule-hi);
+		margin-top: var(--s-2);
+	}
+
+	.waitlist__benefit {
+		display: flex;
+		align-items: center;
+		min-height: 52px;
+		border-bottom: 1px solid var(--c-dark-rule);
+		font-size: 0.8438rem; /* 13.5 */
+		color: var(--c-dark-text);
+	}
+
+	.waitlist__benefit:last-child {
+		border-bottom: none;
+	}
+
+	@media (min-width: 1024px) {
+		.waitlist__grid {
+			grid-template-columns: 1.06fr 0.94fr;
+			gap: 76px;
+			align-items: start;
+		}
+	}
+</style>

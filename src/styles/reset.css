@@ -37,6 +37,16 @@ video {
 	max-width: 100%;
 }
 
+/*
+ * The UA rule for [hidden] is a plain `display: none` on the element, so any
+ * class that sets `display` beats it. State panels are toggled with the
+ * attribute — so that they leave the accessibility tree — which makes this
+ * override load-bearing, not cosmetic.
+ */
+[hidden] {
+	display: none !important;
+}
+
 button,
 input,
 select,

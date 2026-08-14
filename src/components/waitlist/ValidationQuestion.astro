@@ -1,0 +1,167 @@
+---
+import {
+	validationQuestion,
+	validationOptions,
+} from '../../data/validation-options';
+
+/**
+ * Buttons with aria-pressed, not a radiogroup: a radiogroup traps arrow keys
+ * and firing on `change` would send a request per arrow press, while adding a
+ * submit button puts two steps in front of a one-tap question.
+ */
+---
+
+<div class="vq" data-vq hidden>
+	<h4 class="vq__label" id="vq-label">{validationQuestion}</h4>
+
+	<ul class="vq__options" aria-labelledby="vq-label" data-vq-options>
+		{
+			validationOptions.map((o) => (
+				<li>
+					<button
+						type="button"
+						class="vq__option"
+						data-option={o.id}
+						aria-pressed="false"
+					>
+						{o.label}
+					</button>
+				</li>
+			))
+		}
+	</ul>
+
+	<div class="vq__noted" data-vq-noted hidden>
+		<p class="vq__noted-label">
+			<span class="vq__badge">Noted</span>
+			<span data-vq-choice></span>
+		</p>
+		<p class="vq__thanks" role="status">
+			Thanks — this helps us build the right first version.
+		</p>
+	</div>
+</div>
+
+<style>
+	.vq {
+		display: flex;
+		flex-direction: column;
+		gap: var(--s-4);
+		border-top: 1px solid var(--c-dark-rule-hi);
+		padding-top: var(--s-5);
+		margin-top: var(--s-5);
+	}
+
+	.vq__label {
+		font-size: var(--fs-body);
+		font-weight: 400;
+		line-height: 1.6;
+		color: var(--c-dark-text);
+	}
+
+	/* Mobile: a stacked list with 44px targets. Wrapping pills from 768. */
+	.vq__options {
+		display: flex;
+		flex-direction: column;
+		gap: 0;
+	}
+
+	.vq__option {
+		display: flex;
+		align-items: center;
+		width: 100%;
+		min-height: 44px;
+		padding: 12px 0;
+		border-top: 1px solid var(--c-dark-rule);
+		font-family: var(--font-mono);
+		font-weight: 500;
+		font-size: var(--fs-mono-sm);
+		letter-spacing: 0.14em;
+		text-transform: uppercase;
+		text-align: left;
+		color: var(--c-dark-body);
+		line-height: 1.3;
+		transition:
+			color var(--t-hover) var(--ease),
+			border-color var(--t-hover) var(--ease);
+	}
+
+	.vq__options li:first-child .vq__option {
+		border-top: none;
+	}
+
+	@media (hover: hover) and (pointer: fine) {
+		.vq__option:hover {
+			color: var(--c-dark-text);
+		}
+	}
+
+	.vq__option:active {
+		transform: scale(var(--press-scale));
+		transition-duration: var(--t-fast);
+	}
+
+	.vq__option[disabled] {
+		cursor: default;
+		opacity: 0.5;
+	}
+
+	.vq__noted {
+		display: flex;
+		flex-direction: column;
+		gap: var(--s-2);
+	}
+
+	.vq__noted-label {
+		display: flex;
+		align-items: center;
+		gap: var(--s-2);
+		font-size: var(--fs-body);
+		color: var(--c-dark-text);
+	}
+
+	.vq__badge {
+		border-radius: var(--r-tag);
+		padding: 3px 7px;
+		background: var(--c-dark-rule-hi);
+		color: var(--c-dark-text);
+		font-family: var(--font-mono);
+		font-weight: 500;
+		font-size: var(--fs-mono-xs);
+		letter-spacing: 0.12em;
+		text-transform: uppercase;
+		flex: none;
+	}
+
+	.vq__thanks {
+		font-size: var(--fs-caption);
+		line-height: 1.65;
+		color: var(--c-dark-body);
+	}
+
+	@media (min-width: 768px) {
+		.vq__options {
+			flex-direction: row;
+			flex-wrap: wrap;
+			gap: var(--s-2);
+		}
+
+		.vq__option {
+			width: auto;
+			min-height: 38px;
+			padding: 0 15px;
+			border: 1px solid var(--c-dark-rule-hi);
+			border-radius: var(--r-pill);
+		}
+
+		.vq__options li:first-child .vq__option {
+			border: 1px solid var(--c-dark-rule-hi);
+		}
+
+		@media (hover: hover) and (pointer: fine) {
+			.vq__option:hover {
+				border-color: var(--c-dark-text);
+			}
+		}
+	}
+</style>
