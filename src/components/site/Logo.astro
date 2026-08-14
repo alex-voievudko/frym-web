@@ -1,0 +1,84 @@
+---
+/**
+ * Frym wordmark and mark.
+ *
+ * SWAP POINT — the real logo is coming later. Everything else references this
+ * component, so replacing the markup below is the whole change. The mark is
+ * currently CSS only (a rounded ink tile with a green waterline at the
+ * bottom), exactly as drawn in the artboards; a real asset drops in here.
+ */
+interface Props {
+	/** `footer` is one step smaller and uses the tile radius. */
+	context?: 'header' | 'footer';
+	href?: string;
+}
+
+const { context = 'header', href = '/' } = Astro.props;
+---
+
+<a class="logo" data-context={context} {href} aria-label="Frym — home">
+	<span class="logo__mark" aria-hidden="true">
+		<span class="logo__waterline"></span>
+	</span>
+	<span class="logo__word">frym</span>
+</a>
+
+<style>
+	.logo {
+		display: inline-flex;
+		align-items: center;
+		align-self: flex-start;
+		gap: 9px;
+	}
+
+	.logo__mark {
+		--mark: 26px;
+		display: flex;
+		align-items: flex-end;
+		width: var(--mark);
+		height: var(--mark);
+		flex: none;
+		background: var(--c-ink);
+		border-radius: var(--r-tile);
+		/* Both derived from --mark so the waterline holds its position as the
+		   mark scales. Not percentages: percentage padding resolves against
+		   the containing block's width, which here is the whole logo link. */
+		padding-bottom: calc(var(--mark) * 0.3);
+	}
+
+	.logo__waterline {
+		width: 100%;
+		height: calc(var(--mark) * 0.077);
+		background: var(--c-green-light);
+	}
+
+	.logo__word {
+		font-family: var(--font-sans);
+		font-weight: 700;
+		font-size: var(--fs-wordmark);
+		line-height: 1;
+		letter-spacing: -0.05em;
+		color: var(--c-ink);
+	}
+
+	.logo[data-context='footer'] .logo__mark {
+		--mark: 26px;
+	}
+
+	.logo[data-context='footer'] .logo__word {
+		font-size: clamp(1.1875rem, 1.1411rem + 0.1905vw, 1.3125rem); /* 19 → 21 */
+	}
+
+	@media (min-width: 768px) {
+		.logo[data-context='header'] .logo__mark {
+			--mark: 28px;
+		}
+	}
+
+	@media (min-width: 1024px) {
+		.logo[data-context='header'] .logo__mark {
+			--mark: 30px;
+			border-radius: 9px;
+		}
+	}
+</style>

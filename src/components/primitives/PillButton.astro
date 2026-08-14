@@ -1,0 +1,139 @@
+---
+/**
+ * The only button shape in the system — "anything you press is a pill".
+ * Renders <a> when given href, <button> otherwise.
+ *
+ * Hover is gated behind a pointer query because the mobile artboard has no
+ * hover states at all. Press is the design system's 1.5% scale-down at 120ms.
+ */
+interface Props {
+	href?: string;
+	variant?: 'dark' | 'light' | 'outline';
+	/** sm 36 (mobile header) · md 44 (header) · lg 52 (hero, closing, submit) */
+	size?: 'sm' | 'md' | 'lg';
+	/** Full-width below 768, matching the mobile artboard's block buttons. */
+	block?: boolean;
+	type?: 'button' | 'submit';
+	class?: string;
+	id?: string;
+}
+
+const {
+	href,
+	variant = 'dark',
+	size = 'md',
+	block = false,
+	type = 'button',
+	class: className,
+	id,
+} = Astro.props;
+
+const Tag = href ? 'a' : 'button';
+const tagProps = href ? { href } : { type };
+---
+
+<Tag
+	{id}
+	class:list={['pill', className, { 'pill--block': block }]}
+	data-variant={variant}
+	data-size={size}
+	{...tagProps}
+>
+	<slot />
+</Tag>
+
+<style>
+	.pill {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		border-radius: var(--r-pill);
+		font-family: var(--font-mono);
+		font-weight: 500;
+		text-transform: uppercase;
+		line-height: 1;
+		white-space: nowrap;
+		border: 1px solid transparent;
+		transition:
+			background var(--t-hover) var(--ease),
+			border-color var(--t-hover) var(--ease),
+			color var(--t-hover) var(--ease);
+	}
+
+	.pill[data-size='sm'] {
+		height: 36px;
+		padding-inline: 15px;
+		font-size: var(--fs-mono-sm);
+		letter-spacing: 0.14em;
+	}
+
+	.pill[data-size='md'] {
+		height: 44px;
+		padding-inline: 22px;
+		font-size: var(--fs-mono-label);
+		letter-spacing: 0.16em;
+	}
+
+	.pill[data-size='lg'] {
+		height: 52px;
+		padding-inline: 26px;
+		font-size: var(--fs-btn);
+		letter-spacing: 0.16em;
+	}
+
+	.pill[data-variant='dark'] {
+		background: var(--c-ink);
+		color: var(--c-paper);
+	}
+
+	/* Inverted, for use on the dark waitlist band. */
+	.pill[data-variant='light'] {
+		background: var(--c-dark-cta);
+		color: var(--c-ink);
+	}
+
+	.pill[data-variant='outline'] {
+		background: transparent;
+		border-color: var(--c-divider);
+		color: var(--c-ink);
+	}
+
+	.pill--block {
+		display: flex;
+		width: 100%;
+		padding-inline: 0;
+	}
+
+	@media (min-width: 768px) {
+		.pill--block {
+			display: inline-flex;
+			width: auto;
+			padding-inline: 26px;
+		}
+	}
+
+	@media (hover: hover) and (pointer: fine) {
+		.pill[data-variant='dark']:hover {
+			background: var(--c-ink-hover);
+		}
+		.pill[data-variant='light']:hover {
+			background: var(--c-dark-cta-hover);
+		}
+		.pill[data-variant='outline']:hover {
+			border-color: var(--c-ink);
+			background: var(--c-raised);
+		}
+	}
+
+	.pill:active {
+		transform: scale(var(--press-scale));
+		transition-duration: var(--t-fast);
+	}
+
+	.pill[disabled] {
+		background: var(--c-track);
+		color: var(--c-faint);
+		cursor: default;
+		transform: none;
+	}
+</style>

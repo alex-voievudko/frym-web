@@ -1,0 +1,62 @@
+---
+/**
+ * Every page section. Handles the full-bleed ground, the vertical rhythm
+ * variant, and the contained inner column — the three things all 11 sections
+ * need and none of them should re-implement.
+ */
+interface Props {
+	id?: string;
+	/** Ground. `raised` is the tinted band, `dark` the inverted waitlist band. */
+	tint?: 'none' | 'raised' | 'dark';
+	pad?: 'section' | 'hero' | 'next' | 'waitlist' | 'cta';
+	labelledby?: string;
+	class?: string;
+}
+
+const {
+	id,
+	tint = 'none',
+	pad = 'section',
+	labelledby,
+	class: className,
+} = Astro.props;
+---
+
+<section
+	id={id}
+	class:list={['section', className, { 'on-dark': tint === 'dark' }]}
+	data-tint={tint}
+	data-pad={pad}
+	aria-labelledby={labelledby}
+>
+	<div class="container">
+		<slot />
+	</div>
+</section>
+
+<style>
+	.section[data-tint='raised'] {
+		background: var(--c-raised);
+	}
+
+	.section[data-tint='dark'] {
+		background: var(--c-dark-bg);
+		color: var(--c-dark-body);
+	}
+
+	.section[data-pad='section'] {
+		padding-block: var(--pad-section);
+	}
+	.section[data-pad='hero'] {
+		padding-block: var(--pad-hero-top) var(--pad-hero-bot);
+	}
+	.section[data-pad='next'] {
+		padding-block: var(--pad-next);
+	}
+	.section[data-pad='waitlist'] {
+		padding-block: var(--pad-waitlist);
+	}
+	.section[data-pad='cta'] {
+		padding-block: var(--pad-cta);
+	}
+</style>

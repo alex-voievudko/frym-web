@@ -1,0 +1,191 @@
+---
+import Logo from './Logo.astro';
+import { site, footerGroups } from '../../lib/site';
+---
+
+<footer class="footer">
+	<div class="container footer__inner">
+		<div class="footer__top">
+			<div class="footer__brand">
+				<Logo context="footer" />
+				<p class="footer__blurb">{site.tagline}</p>
+			</div>
+
+			{/*
+			  Mobile collapses this to a single wrapped row: the group headings
+			  are hidden, the wrappers go display:contents so the links flow
+			  together, and the waitlist link drops (the sticky bar carries it).
+			*/}
+			<div class="footer__groups">
+				{
+					footerGroups.map((group) => (
+						<div class="footer__group">
+							<h2 class="footer__heading">{group.heading}</h2>
+							<ul>
+								{group.links.map((link) => (
+									<li data-desktop-only={link.mobileHidden || undefined}>
+										<a class="footer__link" href={link.href}>
+											{link.label}
+										</a>
+									</li>
+								))}
+							</ul>
+						</div>
+					))
+				}
+			</div>
+		</div>
+
+		<div class="footer__bottom">
+			<p class="footer__meta">© Frym. All rights reserved.</p>
+			<p class="footer__meta footer__meta--faint" data-desktop-only>
+				Pre-launch · Validation
+			</p>
+		</div>
+	</div>
+</footer>
+
+<style>
+	.footer {
+		background: var(--c-raised);
+		/* The fixed mobile CTA bar sits over this; reserve its height plus the
+		   home-indicator inset so the bottom row is never covered. */
+		padding-block: var(--pad-footer-top)
+			calc(var(--mobile-bar-h) + env(safe-area-inset-bottom));
+	}
+
+	.footer__inner {
+		display: flex;
+		flex-direction: column;
+		gap: var(--s-7);
+	}
+
+	.footer__top {
+		display: flex;
+		flex-direction: column;
+		gap: var(--s-6);
+	}
+
+	.footer__brand {
+		display: flex;
+		flex-direction: column;
+		gap: var(--s-3);
+	}
+
+	.footer__blurb {
+		font-size: var(--fs-caption);
+		line-height: 1.7;
+		max-width: 320px;
+	}
+
+	.footer__groups {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 10px 24px;
+	}
+
+	.footer__group,
+	.footer__group ul {
+		display: contents;
+	}
+
+	.footer__heading {
+		display: none;
+	}
+
+	[data-desktop-only] {
+		display: none;
+	}
+
+	.footer__link {
+		font-size: var(--fs-caption);
+		line-height: 1.7;
+		color: var(--c-body);
+		transition: color var(--t-hover) var(--ease);
+	}
+
+	.footer__bottom {
+		display: flex;
+		flex-wrap: wrap;
+		gap: var(--s-3) var(--s-5);
+		justify-content: space-between;
+		border-top: 1px solid var(--c-divider);
+		padding-top: var(--s-5);
+	}
+
+	.footer__meta {
+		font-family: var(--font-mono);
+		font-weight: 400;
+		font-size: var(--fs-mono-sm);
+		letter-spacing: 0.12em;
+		text-transform: uppercase;
+		color: var(--c-secondary);
+		line-height: 1;
+	}
+
+	.footer__meta--faint {
+		color: var(--c-faint);
+	}
+
+	@media (hover: hover) and (pointer: fine) {
+		.footer__link:hover {
+			color: var(--c-ink);
+		}
+	}
+
+	@media (min-width: 768px) {
+		.footer {
+			padding-block: var(--pad-footer-top) var(--pad-footer-bot);
+		}
+
+		.footer__top {
+			flex-direction: row;
+			justify-content: space-between;
+			gap: 48px;
+		}
+
+		.footer__groups {
+			display: flex;
+			flex-wrap: nowrap;
+			gap: 44px;
+		}
+
+		.footer__group {
+			display: flex;
+			flex-direction: column;
+			gap: var(--s-3);
+		}
+
+		.footer__group ul {
+			display: flex;
+			flex-direction: column;
+			gap: 7px;
+		}
+
+		.footer__heading {
+			display: block;
+			font-family: var(--font-mono);
+			font-weight: 500;
+			font-size: var(--fs-mono-sm);
+			letter-spacing: 0.14em;
+			text-transform: uppercase;
+			color: var(--c-secondary);
+			line-height: 1;
+		}
+
+		li[data-desktop-only],
+		p[data-desktop-only] {
+			display: block;
+		}
+	}
+
+	@media (min-width: 1024px) {
+		.footer__groups {
+			gap: 56px;
+		}
+
+		.footer__top {
+			gap: 60px;
+		}
+	}
+</style>

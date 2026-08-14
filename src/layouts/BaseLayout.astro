@@ -1,6 +1,9 @@
 ---
 import { Font } from 'astro:assets';
 import { site } from '../lib/site';
+import SiteHeader from '../components/site/SiteHeader.astro';
+import SiteFooter from '../components/site/SiteFooter.astro';
+import MobileCtaBar from '../components/site/MobileCtaBar.astro';
 import '../styles/global.css';
 
 interface Props {
@@ -8,12 +11,18 @@ interface Props {
 	description?: string;
 	/** Set on pages that should not be indexed (e.g. the dev kit). */
 	noindex?: boolean;
+	/** Mobile-only sticky CTA. Home page only — it targets an on-page anchor. */
+	stickyCta?: boolean;
+	/** Skip the site chrome entirely (dev kit). */
+	bare?: boolean;
 }
 
 const {
 	title = site.title,
 	description = site.description,
 	noindex = false,
+	stickyCta = false,
+	bare = false,
 } = Astro.props;
 
 const canonical = new URL(Astro.url.pathname, Astro.site).href;
@@ -56,7 +65,12 @@ const ogImage = new URL('/og.png', Astro.site).href;
 	</head>
 	<body>
 		<a class="skip-link" href="#main">Skip to content</a>
-		<slot />
+		{!bare && <SiteHeader />}
+		<main id="main">
+			<slot />
+		</main>
+		{!bare && <SiteFooter />}
+		{stickyCta && <MobileCtaBar />}
 	</body>
 </html>
 

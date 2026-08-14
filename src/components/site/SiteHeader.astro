@@ -1,0 +1,128 @@
+---
+import Logo from './Logo.astro';
+import PillButton from '../primitives/PillButton.astro';
+import { navLinks, WAITLIST_ANCHOR } from '../../lib/site';
+---
+
+<header class="header">
+	<div class="container header__inner">
+		<Logo context="header" />
+
+		<div class="header__right">
+			<nav class="header__nav" aria-label="Primary">
+				<ul>
+					{
+						navLinks.map(({ href, label }) => (
+							<li>
+								<a class="header__link" {href}>
+									{label}
+								</a>
+							</li>
+						))
+					}
+				</ul>
+			</nav>
+
+			{/*
+			  The mobile artboard drops the nav entirely and shortens the label.
+			  Each pill is wrapped rather than being hidden directly: PillButton's
+			  own scoped `display` rule would otherwise outrank a class applied
+			  from here.
+			*/}
+			<span class="header__cta" data-at="mobile">
+				<PillButton href={WAITLIST_ANCHOR} size="sm">Join waitlist</PillButton>
+			</span>
+			<span class="header__cta" data-at="wide">
+				<PillButton href={WAITLIST_ANCHOR} size="md">Join the waitlist</PillButton>
+			</span>
+		</div>
+	</div>
+</header>
+
+<style>
+	.header {
+		position: sticky;
+		top: 0;
+		z-index: 20;
+		background: var(--c-paper);
+		border-bottom: 1px solid var(--c-divider);
+	}
+
+	.header__inner {
+		height: var(--header-h);
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: var(--s-4);
+	}
+
+	.header__right {
+		display: flex;
+		align-items: center;
+		gap: 24px;
+	}
+
+	.header__nav {
+		display: none;
+	}
+
+	.header__nav ul {
+		display: flex;
+		align-items: center;
+		gap: 24px;
+	}
+
+	.header__link {
+		font-family: var(--font-mono);
+		font-weight: 500;
+		font-size: var(--fs-mono-sm);
+		letter-spacing: 0.14em;
+		text-transform: uppercase;
+		color: var(--c-body);
+		transition: color var(--t-hover) var(--ease);
+	}
+
+	.header__cta {
+		display: inline-flex;
+		flex: none;
+	}
+
+	.header__cta[data-at='wide'] {
+		display: none;
+	}
+
+	@media (hover: hover) and (pointer: fine) {
+		.header__link:hover {
+			color: var(--c-ink);
+		}
+	}
+
+	@media (min-width: 768px) {
+		.header__nav {
+			display: block;
+		}
+
+		.header__cta[data-at='mobile'] {
+			display: none;
+		}
+
+		.header__cta[data-at='wide'] {
+			display: inline-flex;
+		}
+	}
+
+	@media (min-width: 1024px) {
+		.header__right {
+			gap: 34px;
+		}
+
+		.header__nav ul {
+			gap: 34px;
+		}
+
+		.header__link {
+			font-size: var(--fs-mono-label);
+			letter-spacing: 0.16em;
+		}
+	}
+</style>

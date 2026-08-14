@@ -1,9 +1,22 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import Section from '../components/primitives/Section.astro';
+
+// Skeleton. Sections are filled in order across the next steps; the grounds,
+// ids and vertical rhythm are correct now so the page can be checked at every
+// width before any content lands.
 ---
 
-<BaseLayout>
-	<main id="main" class="container">
-		<h1>Frym</h1>
-	</main>
+<BaseLayout stickyCta>
+	<Section pad="hero"><h1>Hero</h1></Section>
+	<Section><h2>Your balance is not your budget</h2></Section>
+	<Section tint="raised"><h2>Three simple states</h2></Section>
+	<Section id="how"><h2>How Frym works</h2></Section>
+	<Section><h2>A simple example</h2></Section>
+	<Section id="why" tint="raised"><h2>Not another budget tracker</h2></Section>
+	<Section><h2>Built for everyday money</h2></Section>
+	<Section pad="next"><h2>What comes next</h2></Section>
+	<Section id="waitlist" tint="dark" pad="waitlist"><h2>Want to try Frym early?</h2></Section>
+	<Section id="faq"><h2>FAQ</h2></Section>
+	<Section pad="cta"><h2>Closing</h2></Section>
 </BaseLayout>
