@@ -20,7 +20,7 @@ import { WAITLIST_ANCHOR } from '../../lib/site';
 
 <style>
 	.closing {
-		border-top: 1px solid var(--c-divider);
+		border-top: 1px solid var(--border-default);
 	}
 
 	.closing :global(.container) {
@@ -31,7 +31,7 @@ import { WAITLIST_ANCHOR } from '../../lib/site';
 	}
 
 	.closing__title {
-		font-size: var(--fs-h2-cta);
+		font-size: var(--type-marketing-h2-cta);
 		line-height: 1.04;
 		letter-spacing: -0.05em;
 		max-width: 900px;
@@ -40,11 +40,11 @@ import { WAITLIST_ANCHOR } from '../../lib/site';
 	/* The second clause drops to secondary so the contrast carries the point. */
 	.closing__muted {
 		display: block;
-		color: var(--c-secondary);
+		color: var(--text-muted);
 	}
 
 	.closing__lead {
-		font-size: var(--fs-lead-sm);
+		font-size: var(--type-body-lg);
 		line-height: 1.7;
 		max-width: 480px;
 	}

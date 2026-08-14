@@ -245,10 +245,10 @@ import { site } from '../../lib/site';
 	.field__label {
 		font-family: var(--font-mono);
 		font-weight: 500;
-		font-size: var(--fs-mono-sm);
+		font-size: var(--mono-action);
 		letter-spacing: 0.16em;
 		text-transform: uppercase;
-		color: var(--c-secondary);
+		color: var(--text-muted);
 		line-height: 1;
 	}
 
@@ -257,34 +257,34 @@ import { site } from '../../lib/site';
 		width: 100%;
 		background: transparent;
 		border: none;
-		border-bottom: 1.5px solid var(--c-dark-rule-hi);
+		border-bottom: 1.5px solid var(--border-onInverse-strong);
 		border-radius: 0;
 		outline: none;
 		padding: 0;
-		color: var(--c-dark-text);
+		color: var(--text-onInverse);
 		/* 16px at every width; anything smaller zooms the viewport on iOS. */
-		font-size: var(--fs-input);
+		font-size: var(--type-input);
 		transition: border-color var(--t-hover) var(--ease);
 	}
 
 	.field__input::placeholder {
-		color: var(--c-secondary);
+		color: var(--text-muted);
 	}
 
 	/* Focus thickens and brightens the rule — never a ring or a glow. */
 	.field__input:focus-visible {
-		border-bottom-color: var(--c-dark-text);
+		border-bottom-color: var(--text-onInverse);
 		outline: none;
 	}
 
 	.field__input[aria-invalid] {
-		border-bottom-color: var(--c-dark-error);
+		border-bottom-color: var(--text-dangerOnInverse);
 	}
 
 	.wl__error {
 		font-size: 0.75rem; /* 12 */
 		line-height: 1.55;
-		color: var(--c-dark-error);
+		color: var(--text-dangerOnInverse);
 	}
 
 	.wl__error:empty {
@@ -306,10 +306,10 @@ import { site } from '../../lib/site';
 	.wl__note {
 		font-family: var(--font-mono);
 		font-weight: 500;
-		font-size: var(--fs-mono-sm);
+		font-size: var(--mono-action);
 		letter-spacing: 0.14em;
 		text-transform: uppercase;
-		color: var(--c-secondary);
+		color: var(--text-muted);
 		line-height: 1;
 		text-align: center;
 	}
@@ -318,36 +318,36 @@ import { site } from '../../lib/site';
 		display: flex;
 		flex-direction: column;
 		gap: var(--s-3);
-		border-top: 1px solid var(--c-dark-rule-hi);
+		border-top: 1px solid var(--border-onInverse-strong);
 		padding-top: var(--s-6);
 	}
 
 	.wl__success-title {
-		font-size: var(--fs-h2-faq);
+		font-size: var(--type-headline-lg);
 		line-height: 1.1;
 		letter-spacing: -0.04em;
-		color: var(--c-dark-text);
+		color: var(--text-onInverse);
 	}
 
 	.wl__success-title:focus-visible {
-		outline: 2px solid var(--c-dark-text);
+		outline: 2px solid var(--text-onInverse);
 		outline-offset: 4px;
 	}
 
 	.wl__success-copy {
-		font-size: var(--fs-lead-sm);
+		font-size: var(--type-body-lg);
 		line-height: 1.7;
-		color: var(--c-dark-body);
+		color: var(--text-bodyOnInverse);
 	}
 
 	.wl__noscript {
 		margin-top: var(--s-5);
 		line-height: 1.7;
-		color: var(--c-dark-body);
+		color: var(--text-bodyOnInverse);
 	}
 
 	.wl__noscript a {
-		color: var(--c-dark-text);
+		color: var(--text-onInverse);
 		text-decoration: underline;
 	}
 

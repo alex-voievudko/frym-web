@@ -1,8 +1,11 @@
 ---
 /**
  * Category plan progress: label, square 4px track, and a `spent / planned`
- * fraction whose denominator is faint. Tone follows the design system —
- * green on track, ochre from 80%, brick past 100 (clamped).
+ * fraction whose denominator is faint.
+ *
+ * Tone: on track, at risk from 95%, over past 100 (clamped). The V1 doc puts
+ * the at-risk threshold at 80%, but the artboards draw 320/380 (84%) on track
+ * and only 218/220 (99%) at risk, so the page follows the artboards.
  */
 interface Props {
 	label: string;
@@ -15,7 +18,7 @@ const { label, spent, planned, class: className } = Astro.props;
 
 const ratio = planned === 0 ? 0 : spent / planned;
 const pct = Math.min(ratio, 1) * 100;
-const tone = ratio > 1 ? 'negative' : ratio >= 0.8 ? 'warning' : 'ok';
+const tone = ratio > 1 ? 'over' : ratio >= 0.95 ? 'atRisk' : 'onTrack';
 ---
 
 <div class:list={['prow', className]}>
@@ -39,16 +42,15 @@ const tone = ratio > 1 ? 'negative' : ratio >= 0.8 ? 'warning' : 'ok';
 		gap: var(--s-3);
 	}
 
+	/* Sans, not Mono — the artboard sets these category names in Sans. */
 	.prow__label {
 		flex: none;
 		width: 72px;
-		font-family: var(--font-mono);
-		font-weight: 400;
-		font-size: var(--fs-mono-label);
-		letter-spacing: 0.12em;
-		text-transform: uppercase;
-		color: var(--c-secondary);
-		line-height: 1;
+		font-family: var(--font-sans);
+		font-weight: 500;
+		font-size: var(--type-label-md);
+		color: var(--text-primary);
+		line-height: 1.2;
 	}
 
 	/* Meters are square — the design system exempts them from the radius scale. */
@@ -56,7 +58,7 @@ const tone = ratio > 1 ? 'negative' : ratio >= 0.8 ? 'warning' : 'ok';
 		flex: 1;
 		min-width: 0;
 		height: 4px;
-		background: var(--c-track);
+		background: var(--meter-track);
 	}
 
 	.prow__fill {
@@ -64,14 +66,14 @@ const tone = ratio > 1 ? 'negative' : ratio >= 0.8 ? 'warning' : 'ok';
 		height: 100%;
 	}
 
-	.prow__fill[data-tone='ok'] {
-		background: var(--c-green-light);
+	.prow__fill[data-tone='onTrack'] {
+		background: var(--meter-fill-secondary);
 	}
-	.prow__fill[data-tone='warning'] {
-		background: var(--c-ochre);
+	.prow__fill[data-tone='atRisk'] {
+		background: var(--money-atRisk);
 	}
-	.prow__fill[data-tone='negative'] {
-		background: var(--c-brick);
+	.prow__fill[data-tone='over'] {
+		background: var(--money-over);
 	}
 
 	.prow__fraction {
@@ -81,11 +83,11 @@ const tone = ratio > 1 ? 'negative' : ratio >= 0.8 ? 'warning' : 'ok';
 		font-family: var(--font-mono);
 		font-weight: 400;
 		font-size: 0.6875rem; /* 11 */
-		color: var(--c-ink);
+		color: var(--text-primary);
 		line-height: 1;
 	}
 
 	.prow__denominator {
-		color: var(--c-faint);
+		color: var(--text-faint);
 	}
 </style>

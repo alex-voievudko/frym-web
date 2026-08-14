@@ -42,7 +42,7 @@ const parts = splitEur(value, { sign });
 		--cents: 0.44em;
 		font-family: var(--font-sans);
 		font-weight: 600;
-		color: var(--c-ink);
+		color: var(--text-primary);
 		line-height: 1;
 		white-space: nowrap;
 	}
@@ -50,11 +50,11 @@ const parts = splitEur(value, { sign });
 	.figure__cents {
 		font-size: var(--cents);
 		letter-spacing: -0.03em;
-		color: var(--c-faint);
+		color: var(--money-cents);
 	}
 
 	.figure[data-size='hero'] {
-		font-size: var(--fs-figure);
+		font-size: var(--type-marketing-figure-xl);
 		line-height: 0.9;
 		letter-spacing: -0.055em;
 	}
@@ -62,19 +62,19 @@ const parts = splitEur(value, { sign });
 	/* Below the hero the artboards set cents at half the figure, not 44%. */
 	.figure[data-size='lg'] {
 		--cents: 0.5em;
-		font-size: clamp(1.5rem, 1.3143rem + 0.7619vw, 1.875rem); /* 24 → 30 */
+		font-size: var(--type-marketing-figure-lg);
 		letter-spacing: -0.04em;
 	}
 
 	.figure[data-size='md'] {
 		--cents: 0.5em;
-		font-size: clamp(1.375rem, 1.2821rem + 0.381vw, 1.625rem); /* 22 → 26 */
+		font-size: var(--type-marketing-figure-md);
 		letter-spacing: -0.04em;
 	}
 
 	.figure[data-size='sm'] {
 		--cents: 0.5em;
-		font-size: 1.25rem; /* 20 */
+		font-size: var(--type-marketing-figure-sm);
 		letter-spacing: -0.035em;
 	}
 </style>

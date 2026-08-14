@@ -63,13 +63,13 @@ const {
 	}
 
 	.row[data-rule='soft'] {
-		border-bottom: 1px solid var(--c-divider-soft);
+		border-bottom: 1px solid var(--border-subtle);
 	}
 	.row[data-rule='divider'] {
-		border-bottom: 1px solid var(--c-divider);
+		border-bottom: 1px solid var(--border-default);
 	}
 	.row[data-rule='ink'] {
-		border-bottom: 1px solid var(--c-ink);
+		border-bottom: 1px solid var(--border-strong);
 	}
 
 	.row__lead {
@@ -89,39 +89,39 @@ const {
 	.row__label {
 		font-family: var(--font-mono);
 		font-weight: 400;
-		font-size: var(--fs-mono-label);
+		font-size: var(--mono-label-md);
 		letter-spacing: 0.14em;
 		text-transform: uppercase;
-		color: var(--c-secondary);
+		color: var(--text-muted);
 		line-height: 1.2;
 	}
 
 	.row[data-strong] .row__label {
 		font-weight: 500;
 		letter-spacing: 0.2em;
-		color: var(--c-ink);
+		color: var(--text-primary);
 	}
 
 	.row__meta {
 		font-family: var(--font-mono);
 		font-weight: 400;
-		font-size: var(--fs-mono-xs);
+		font-size: var(--mono-meta);
 		letter-spacing: 0.12em;
 		text-transform: uppercase;
 		line-height: 1.2;
 	}
 
 	.row__meta[data-tone='secondary'] {
-		color: var(--c-secondary);
+		color: var(--text-muted);
 	}
 	.row__meta[data-tone='warning'] {
-		color: var(--c-ochre);
+		color: var(--text-warning);
 	}
 	.row__meta[data-tone='negative'] {
-		color: var(--c-brick);
+		color: var(--text-danger);
 	}
 	.row__meta[data-tone='reserved'] {
-		color: var(--c-green-dark);
+		color: var(--text-accent);
 	}
 
 	.row__value {
@@ -134,20 +134,20 @@ const {
 	.row__amount {
 		font-family: var(--font-mono);
 		font-weight: 500;
-		font-size: var(--fs-mono-amount, 0.8438rem); /* 13.5 */
-		color: var(--c-ink);
+		font-size: var(--mono-amount-md, 0.8438rem); /* 13.5 */
+		color: var(--text-primary);
 		line-height: 1;
 	}
 
 	/* On the dark band the row colours invert. */
 	:global(.on-dark) .row[data-rule='soft'] {
-		border-bottom-color: var(--c-dark-rule);
+		border-bottom-color: var(--border-onInverse);
 	}
 	:global(.on-dark) .row__label {
-		color: var(--c-dark-body);
+		color: var(--text-bodyOnInverse);
 	}
 	:global(.on-dark) .row[data-strong] .row__label,
 	:global(.on-dark) .row__amount {
-		color: var(--c-dark-text);
+		color: var(--text-onInverse);
 	}
 </style>

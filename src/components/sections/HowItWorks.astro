@@ -94,7 +94,7 @@ const accounts = [
 
 <style>
 	.how {
-		border-top: 1px solid var(--c-divider);
+		border-top: 1px solid var(--border-default);
 	}
 
 	.how__grid {
@@ -112,15 +112,15 @@ const accounts = [
 	.step__index {
 		font-family: var(--font-mono);
 		font-weight: 500;
-		font-size: var(--fs-mono-label);
+		font-size: var(--mono-label-lg);
 		letter-spacing: 0.2em;
 		text-transform: uppercase;
-		color: var(--c-secondary);
+		color: var(--text-muted);
 		line-height: 1;
 	}
 
 	.step__title {
-		font-size: var(--fs-step-title);
+		font-size: var(--type-title-lg);
 		line-height: 1.3;
 		letter-spacing: -0.02em;
 	}
@@ -151,35 +151,35 @@ const accounts = [
 		border-radius: var(--r-tile);
 		font-family: var(--font-mono);
 		font-weight: 500;
-		font-size: var(--fs-mono-xs);
+		font-size: var(--mono-initial);
 		letter-spacing: 0.04em;
 		line-height: 1;
 	}
 
 	.avatar[data-ground='ink'] {
-		background: var(--c-ink);
-		color: var(--c-paper);
+		background: var(--surface-inverse);
+		color: var(--surface-default);
 	}
 	.avatar[data-ground='green'] {
-		background: var(--c-green-dark);
-		color: var(--c-paper);
+		background: var(--text-accent);
+		color: var(--surface-default);
 	}
 	.avatar[data-ground='track'] {
-		background: var(--c-track);
-		color: var(--c-ink);
+		background: var(--surface-sunken);
+		color: var(--text-primary);
 	}
 
 	.step__track {
 		display: block;
 		height: 4px;
-		background: var(--c-track);
+		background: var(--meter-track);
 	}
 
 	.step__fill {
 		display: block;
 		height: 100%;
 		width: 72%;
-		background: var(--c-green-light);
+		background: var(--meter-fill-secondary);
 	}
 
 	.step__free {
@@ -192,10 +192,10 @@ const accounts = [
 	.step__free-label {
 		font-family: var(--font-mono);
 		font-weight: 500;
-		font-size: var(--fs-mono-label);
+		font-size: var(--mono-label-lg);
 		letter-spacing: 0.2em;
 		text-transform: uppercase;
-		color: var(--c-ink);
+		color: var(--text-primary);
 	}
 
 	@media (min-width: 768px) {

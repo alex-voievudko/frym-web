@@ -66,39 +66,39 @@ const tagProps = href ? { href } : { type, disabled };
 	.pill[data-size='sm'] {
 		height: 36px;
 		padding-inline: 15px;
-		font-size: var(--fs-mono-sm);
+		font-size: var(--mono-action);
 		letter-spacing: 0.14em;
 	}
 
 	.pill[data-size='md'] {
 		height: 44px;
 		padding-inline: 22px;
-		font-size: var(--fs-mono-label);
+		font-size: var(--mono-action);
 		letter-spacing: 0.16em;
 	}
 
 	.pill[data-size='lg'] {
 		height: 52px;
 		padding-inline: 26px;
-		font-size: var(--fs-btn);
+		font-size: var(--mono-action);
 		letter-spacing: 0.16em;
 	}
 
 	.pill[data-variant='dark'] {
-		background: var(--c-ink);
-		color: var(--c-paper);
+		background: var(--action-primary-bg);
+		color: var(--text-onInverse);
 	}
 
 	/* Inverted, for use on the dark waitlist band. */
 	.pill[data-variant='light'] {
-		background: var(--c-dark-cta);
-		color: var(--c-ink);
+		background: var(--action-onInverse-bg);
+		color: var(--text-primary);
 	}
 
 	.pill[data-variant='outline'] {
 		background: transparent;
-		border-color: var(--c-divider);
-		color: var(--c-ink);
+		border-color: var(--action-secondary-border);
+		color: var(--text-primary);
 	}
 
 	.pill--block {
@@ -117,14 +117,14 @@ const tagProps = href ? { href } : { type, disabled };
 
 	@media (hover: hover) and (pointer: fine) {
 		.pill[data-variant='dark']:hover {
-			background: var(--c-ink-hover);
+			background: var(--action-primary-bgHover);
 		}
 		.pill[data-variant='light']:hover {
-			background: var(--c-dark-cta-hover);
+			background: var(--action-onInverse-bgHover);
 		}
 		.pill[data-variant='outline']:hover {
-			border-color: var(--c-ink);
-			background: var(--c-raised);
+			border-color: var(--border-strong);
+			background: var(--surface-raised);
 		}
 	}
 
@@ -133,9 +133,10 @@ const tagProps = href ? { href } : { type, disabled };
 		transition-duration: var(--t-fast);
 	}
 
+	/* No opacity tricks — the system gives disabled its own ground and label. */
 	.pill[disabled] {
-		background: var(--c-track);
-		color: var(--c-faint);
+		background: var(--action-disabled-bg);
+		color: var(--action-disabled-label);
 		cursor: default;
 		transform: none;
 	}

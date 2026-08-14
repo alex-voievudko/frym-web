@@ -5,7 +5,7 @@
  *   390  → 20px gutter, 350px content
  *   834  → 48px gutter, 738px content
  *   1440 → 48px gutter, 1160px content, centred (140px from each edge)
- * Saturates at 1256px, which is why no 1280px breakpoint is needed.
+ * Saturates at 1256px.
  */
 .container {
 	width: 100%;
@@ -19,21 +19,21 @@
 	font-family: var(--font-mono);
 	font-weight: 500;
 	text-transform: uppercase;
-	line-height: 1;
+	line-height: 1.2;
 }
 
 .eyebrow {
 	font-family: var(--font-mono);
 	font-weight: 500;
-	font-size: var(--fs-eyebrow);
-	letter-spacing: 0.22em;
+	font-size: var(--type-marketing-eyebrow);
+	letter-spacing: 0.2em;
 	text-transform: uppercase;
-	color: var(--c-secondary);
-	line-height: 1;
+	color: var(--text-muted);
+	line-height: 1.2;
 }
 
 .eyebrow--ink {
-	color: var(--c-ink);
+	color: var(--text-primary);
 }
 
 /*
@@ -42,11 +42,11 @@
  * by `emphasis: true` in src/data/*.ts, never hand-applied.
  */
 .rule-top {
-	border-top: 1px solid var(--c-divider);
+	border-top: 1px solid var(--border-default);
 }
 
 .rule-top[data-emphasis] {
-	border-top-color: var(--c-ink);
+	border-top-color: var(--border-strong);
 }
 
 .prose {
@@ -68,4 +68,27 @@
 /* Figures use lining tabular numerals so columns of money align. */
 .tnum {
 	font-variant-numeric: tabular-nums;
+}
+
+/*
+ * A handful of labels are worded differently on the mobile artboard — the
+ * hero share and the balance ledger's second row. Rendering both and
+ * swapping in CSS beats duplicating the components.
+ */
+.at-wide {
+	display: none;
+}
+
+@media (min-width: 768px) {
+	.eyebrow {
+		letter-spacing: 0.22em;
+	}
+
+	.at-mobile {
+		display: none;
+	}
+
+	.at-wide {
+		display: inline;
+	}
 }

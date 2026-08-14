@@ -38,7 +38,7 @@ const { context = 'header', href = '/' } = Astro.props;
 		width: var(--mark);
 		height: var(--mark);
 		flex: none;
-		background: var(--c-ink);
+		background: var(--surface-inverse);
 		border-radius: var(--r-tile);
 		/* Both derived from --mark so the waterline holds its position as the
 		   mark scales. Not percentages: percentage padding resolves against
@@ -49,16 +49,16 @@ const { context = 'header', href = '/' } = Astro.props;
 	.logo__waterline {
 		width: 100%;
 		height: calc(var(--mark) * 0.077);
-		background: var(--c-green-light);
+		background: var(--brand-mark-accent);
 	}
 
 	.logo__word {
 		font-family: var(--font-sans);
 		font-weight: 700;
-		font-size: var(--fs-wordmark);
+		font-size: var(--type-wordmark);
 		line-height: 1;
 		letter-spacing: -0.05em;
-		color: var(--c-ink);
+		color: var(--text-primary);
 	}
 
 	.logo[data-context='footer'] .logo__mark {

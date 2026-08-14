@@ -44,8 +44,8 @@ import { navLinks, WAITLIST_ANCHOR } from '../../lib/site';
 		position: sticky;
 		top: 0;
 		z-index: 20;
-		background: var(--c-paper);
-		border-bottom: 1px solid var(--c-divider);
+		background: var(--surface-default);
+		border-bottom: 1px solid var(--border-default);
 	}
 
 	.header__inner {
@@ -75,10 +75,10 @@ import { navLinks, WAITLIST_ANCHOR } from '../../lib/site';
 	.header__link {
 		font-family: var(--font-mono);
 		font-weight: 500;
-		font-size: var(--fs-mono-sm);
+		font-size: var(--mono-action);
 		letter-spacing: 0.14em;
 		text-transform: uppercase;
-		color: var(--c-body);
+		color: var(--text-secondary);
 		transition: color var(--t-hover) var(--ease);
 	}
 
@@ -93,7 +93,7 @@ import { navLinks, WAITLIST_ANCHOR } from '../../lib/site';
 
 	@media (hover: hover) and (pointer: fine) {
 		.header__link:hover {
-			color: var(--c-ink);
+			color: var(--text-primary);
 		}
 	}
 
@@ -121,7 +121,7 @@ import { navLinks, WAITLIST_ANCHOR } from '../../lib/site';
 		}
 
 		.header__link {
-			font-size: var(--fs-mono-label);
+			font-size: var(--mono-action);
 			letter-spacing: 0.16em;
 		}
 	}

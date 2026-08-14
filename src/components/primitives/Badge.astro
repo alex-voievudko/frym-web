@@ -22,7 +22,7 @@ const { tone = 'neutral', class: className } = Astro.props;
 		padding: 3px 7px;
 		font-family: var(--font-mono);
 		font-weight: 500;
-		font-size: var(--fs-mono-xs);
+		font-size: var(--mono-tag);
 		letter-spacing: 0.12em;
 		text-transform: uppercase;
 		line-height: 1.2;
@@ -30,19 +30,19 @@ const { tone = 'neutral', class: className } = Astro.props;
 	}
 
 	.badge[data-tone='neutral'] {
-		background: var(--c-track);
-		color: var(--c-body);
+		background: var(--surface-sunken);
+		color: var(--text-secondary);
 	}
 	.badge[data-tone='reserved'] {
-		background: var(--c-green-pale);
-		color: var(--c-green-dark);
+		background: var(--surface-accent-subtle);
+		color: var(--text-accent);
 	}
 	.badge[data-tone='warning'] {
-		background: var(--c-ochre-tint);
-		color: var(--c-ochre);
+		background: var(--surface-warning-subtle);
+		color: var(--text-warning);
 	}
 	.badge[data-tone='negative'] {
-		background: var(--c-brick-tint);
-		color: var(--c-brick);
+		background: var(--surface-danger-subtle);
+		color: var(--text-danger);
 	}
 </style>

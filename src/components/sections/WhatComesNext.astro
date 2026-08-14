@@ -33,7 +33,7 @@ import { whatsNext } from '../../data/whats-next';
 
 <style>
 	.next {
-		border-top: 1px solid var(--c-divider);
+		border-top: 1px solid var(--border-default);
 	}
 
 	.next__grid {
@@ -60,22 +60,22 @@ import { whatsNext } from '../../data/whats-next';
 
 	/* Outline pills, not tinted tags — nothing here is a state. */
 	.next__tag {
-		border: 1px solid var(--c-divider);
+		border: 1px solid var(--border-default);
 		border-radius: var(--r-pill);
 		padding: 8px 13px;
 		font-family: var(--font-mono);
 		font-weight: 500;
-		font-size: var(--fs-mono-sm);
+		font-size: var(--mono-tag);
 		letter-spacing: 0.14em;
 		text-transform: uppercase;
-		color: var(--c-body);
+		color: var(--text-secondary);
 		line-height: 1;
 	}
 
 	.next__disclaimer {
 		font-size: 0.6875rem; /* 11 */
 		line-height: 1.6;
-		color: var(--c-secondary);
+		color: var(--text-muted);
 	}
 
 	@media (min-width: 1024px) {

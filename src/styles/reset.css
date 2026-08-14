@@ -16,11 +16,11 @@ html {
 }
 
 body {
-	background: var(--c-paper);
-	color: var(--c-body);
+	background: var(--surface-default);
+	color: var(--text-secondary);
 	font-family: var(--font-sans);
-	font-size: var(--fs-body);
-	line-height: 1.75;
+	font-size: var(--type-body-md);
+	line-height: 1.7;
 	-webkit-font-smoothing: antialiased;
 
 	/* `clip`, not `hidden`. The artboards wrapped everything in a
@@ -65,7 +65,7 @@ h1,
 h2,
 h3,
 h4 {
-	color: var(--c-ink);
+	color: var(--text-primary);
 	font-weight: 600;
 	text-wrap: balance;
 }
@@ -91,12 +91,12 @@ ol {
 }
 
 :focus-visible {
-	outline: 2px solid var(--c-ink);
+	outline: 2px solid var(--border-strong);
 	outline-offset: 3px;
 }
 
 .on-dark :focus-visible {
-	outline-color: var(--c-dark-text);
+	outline-color: var(--text-onInverse);
 }
 
 @media (prefers-reduced-motion: reduce) {

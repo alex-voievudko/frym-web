@@ -47,11 +47,9 @@ import { site, footerGroups } from '../../lib/site';
 
 <style>
 	.footer {
-		background: var(--c-raised);
-		/* The fixed mobile CTA bar sits over this; reserve its height plus the
-		   home-indicator inset so the bottom row is never covered. */
+		background: var(--surface-raised);
 		padding-block: var(--pad-footer-top)
-			calc(var(--mobile-bar-h) + env(safe-area-inset-bottom));
+			calc(var(--pad-footer-bot) + env(safe-area-inset-bottom));
 	}
 
 	.footer__inner {
@@ -73,7 +71,7 @@ import { site, footerGroups } from '../../lib/site';
 	}
 
 	.footer__blurb {
-		font-size: var(--fs-caption);
+		font-size: var(--type-body-sm);
 		line-height: 1.7;
 		max-width: 320px;
 	}
@@ -98,9 +96,9 @@ import { site, footerGroups } from '../../lib/site';
 	}
 
 	.footer__link {
-		font-size: var(--fs-caption);
+		font-size: var(--type-body-sm);
 		line-height: 1.7;
-		color: var(--c-body);
+		color: var(--text-secondary);
 		transition: color var(--t-hover) var(--ease);
 	}
 
@@ -109,35 +107,31 @@ import { site, footerGroups } from '../../lib/site';
 		flex-wrap: wrap;
 		gap: var(--s-3) var(--s-5);
 		justify-content: space-between;
-		border-top: 1px solid var(--c-divider);
+		border-top: 1px solid var(--border-default);
 		padding-top: var(--s-5);
 	}
 
 	.footer__meta {
 		font-family: var(--font-mono);
 		font-weight: 400;
-		font-size: var(--fs-mono-sm);
+		font-size: var(--mono-meta);
 		letter-spacing: 0.12em;
 		text-transform: uppercase;
-		color: var(--c-secondary);
+		color: var(--text-muted);
 		line-height: 1;
 	}
 
 	.footer__meta--faint {
-		color: var(--c-faint);
+		color: var(--text-faint);
 	}
 
 	@media (hover: hover) and (pointer: fine) {
 		.footer__link:hover {
-			color: var(--c-ink);
+			color: var(--text-primary);
 		}
 	}
 
 	@media (min-width: 768px) {
-		.footer {
-			padding-block: var(--pad-footer-top) var(--pad-footer-bot);
-		}
-
 		.footer__top {
 			flex-direction: row;
 			justify-content: space-between;
@@ -166,10 +160,10 @@ import { site, footerGroups } from '../../lib/site';
 			display: block;
 			font-family: var(--font-mono);
 			font-weight: 500;
-			font-size: var(--fs-mono-sm);
+			font-size: var(--mono-meta);
 			letter-spacing: 0.14em;
 			text-transform: uppercase;
-			color: var(--c-secondary);
+			color: var(--text-muted);
 			line-height: 1;
 		}
 
