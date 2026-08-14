@@ -1,0 +1,150 @@
+/*
+ * Frym design tokens.
+ *
+ * Extracted from "Frym Design System.dc.html" (marked DESIGN SYSTEM V1 ·
+ * LOCKED PALETTE & TYPOGRAPHY) and the three landing artboards. Token names
+ * follow the design system's own naming — it states "token names are the
+ * contract".
+ *
+ * Three rules the system repeats and this file encodes by omission:
+ * no shadows, no gradients, no cards. All depth is hairlines and grounds.
+ *
+ * --font-sans / --font-mono are NOT declared here. Astro's Fonts API emits
+ * them with metric-matched fallbacks; redeclaring would drop the metrics.
+ */
+
+:root {
+	/* ── surfaces ──────────────────────────────────────────── */
+	--c-paper: #f7f5ef; /* app ground everywhere */
+	--c-paper-hi: #fcfbf6; /* sheets and modals only */
+	--c-raised: #edeae3; /* tinted section band */
+	--c-track: #e7e8e1; /* unfilled progress, icon tiles */
+
+	/* ── text ──────────────────────────────────────────────── */
+	--c-ink: #141718;
+	--c-ink-hover: #000;
+	--c-body: #5b5e57;
+	--c-secondary: #8e918a; /* mono labels, metadata — 2.93:1, see plan */
+	--c-faint: #adafa7; /* cents, denominators — 2.03:1, see plan */
+
+	/* ── rules ─────────────────────────────────────────────── */
+	--c-divider: #d9d9d2; /* section hairline */
+	--c-divider-soft: #e4e4dd; /* row hairline */
+
+	/* ── allocation semantics (the product's core) ─────────── */
+	--c-free: #141718;
+	--c-reserved: #7a8b72;
+	--c-locked: #d0d1ca;
+
+	/* ── accents ───────────────────────────────────────────── */
+	--c-green: #7a8b72;
+	--c-green-light: #aab5a4;
+	--c-green-pale: #dde3d9;
+	--c-green-dark: #5f7059;
+	--c-ochre: #9a741c;
+	--c-ochre-tint: #efe2c8;
+	--c-brick: #b34e42;
+	--c-brick-tint: #f0dcd8;
+
+	/* ── dark band (waitlist section) ──────────────────────── */
+	--c-dark-bg: #141718;
+	--c-dark-text: #f7f5ef;
+	--c-dark-body: #adafa7;
+	--c-dark-rule: #2a2d2d;
+	--c-dark-rule-hi: #4a4d4d;
+	--c-dark-error: #d89a90; /* 7.67:1 on ink */
+	--c-dark-cta: #f7f5ef;
+	--c-dark-cta-hover: #fff;
+
+	/* ── radius ────────────────────────────────────────────── */
+	--r-tag: 3px; /* the one non-pill radius, so tags never read as pressable */
+	--r-tile: 8px;
+	--r-sheet: 14px;
+	--r-pill: 999px;
+
+	/* ── space (4pt base) ──────────────────────────────────── */
+	--s-1: 4px;
+	--s-2: 8px;
+	--s-3: 12px;
+	--s-4: 16px;
+	--s-5: 20px;
+	--s-6: 28px;
+	--s-7: 40px;
+
+	/* ── motion — defined in full; minimal use for now ─────── */
+	--ease: cubic-bezier(0.2, 0.8, 0.2, 1); /* one curve, no springs */
+	--t-fast: 120ms;
+	--t-base: 220ms;
+	--t-slow: 320ms;
+	--t-hover: 160ms;
+	--press-scale: 0.985; /* design system: 1.5% scale-down */
+
+	/* ── fluid type — two-anchor fits, 390px → 1440px ──────── */
+	--fs-h1: clamp(2.5rem, 1.6643rem + 3.4286vw, 4.75rem); /* 40 → 76 */
+	--fs-h2: clamp(1.8125rem, 1.4179rem + 1.619vw, 2.875rem); /* 29 → 46 */
+	--fs-h2-waitlist: clamp(2rem, 1.5357rem + 1.9048vw, 3.25rem); /* 32 → 52 */
+	--fs-h2-cta: clamp(2rem, 1.2571rem + 3.0476vw, 4rem); /* 32 → 64 */
+	--fs-h2-faq: clamp(1.625rem, 1.4393rem + 0.7619vw, 2.125rem); /* 26 → 34 */
+	--fs-h2-next: clamp(1.5rem, 1.3143rem + 0.7619vw, 2.125rem); /* 24 → 34 */
+	--fs-figure: clamp(3.5rem, 2.85rem + 2.6667vw, 5.25rem); /* 56 → 84 */
+	--fs-lead: clamp(0.9688rem, 0.8875rem + 0.3333vw, 1.1875rem); /* 15.5 → 19 */
+	--fs-lead-sm: clamp(0.9063rem, 0.8728rem + 0.1429vw, 1rem); /* 14.5 → 16 */
+	--fs-body: clamp(0.875rem, 0.8634rem + 0.0476vw, 0.9063rem); /* 14 → 14.5 */
+	--fs-caption: clamp(0.7813rem, 0.7697rem + 0.0476vw, 0.8125rem); /* 12.5 → 13 */
+	--fs-card-title: clamp(1.125rem, 1.0321rem + 0.381vw, 1.375rem); /* 18 → 22 */
+	--fs-step-title: clamp(1.0625rem, 1.0161rem + 0.1905vw, 1.1875rem); /* 17 → 19 */
+	--fs-faq-q: clamp(0.9688rem, 0.9107rem + 0.2381vw, 1.125rem); /* 15.5 → 18 */
+	--fs-wordmark: clamp(1.3125rem, 1.2196rem + 0.381vw, 1.5625rem); /* 21 → 25 */
+
+	/* mono */
+	--fs-eyebrow: clamp(0.625rem, 0.6018rem + 0.0952vw, 0.6875rem); /* 10 → 11 */
+	--fs-mono-label: 0.625rem; /* 10 — in-component labels, flat at all widths */
+	--fs-mono-sm: 0.5938rem; /* 9.5 — field labels, meta */
+	--fs-mono-xs: 0.5625rem; /* 9 — tags, row meta */
+	--fs-btn: clamp(0.6563rem, 0.6447rem + 0.0476vw, 0.6875rem); /* 10.5 → 11 */
+
+	/* FIXED 16px at every width — anything smaller makes iOS Safari
+	   zoom the viewport when the field takes focus. */
+	--fs-input: 1rem;
+
+	/* ── fluid vertical rhythm ─────────────────────────────── */
+	--pad-section: clamp(3.25rem, 2.3214rem + 3.8095vw, 5.75rem); /* 52 → 92 */
+	--pad-hero-top: clamp(2.75rem, 1.3571rem + 5.7143vw, 6.5rem); /* 44 → 104 */
+	--pad-hero-bot: clamp(3rem, 1.8857rem + 4.5714vw, 6rem); /* 48 → 96 */
+	--pad-next: clamp(3rem, 2.2571rem + 3.0476vw, 5rem); /* 48 → 80 */
+	--pad-waitlist: clamp(3.25rem, 2.2286rem + 4.1905vw, 6rem); /* 52 → 96 */
+	--pad-cta: clamp(3.5rem, 2.3857rem + 4.5714vw, 6.5rem); /* 56 → 104 */
+	--pad-footer-top: clamp(2.25rem, 1.8786rem + 1.5238vw, 3.5rem); /* 36 → 56 */
+	--pad-footer-bot: clamp(2.125rem, 1.9764rem + 0.6095vw, 2.625rem); /* 34 → 42 */
+
+	/* ── layout ────────────────────────────────────────────── */
+	--gutter: clamp(1.25rem, 6.3063vw - 0.2871rem, 3rem); /* 20 @390 → 48 @834+ */
+	--measure: 72.5rem; /* 1160px content */
+	--prose: 68ch; /* the artboards were fixed-width and set none */
+	--header-h: 60px;
+	--mobile-bar-h: 84px;
+
+	/* heading metrics step with the layout, not fluidly */
+	--lh-h1: 1.05;
+	--tr-h1: -0.045em;
+	--lh-h2: 1.12;
+	--tr-h2: -0.04em;
+}
+
+@media (min-width: 768px) {
+	:root {
+		--header-h: 70px;
+		--lh-h1: 1.02;
+		--lh-h2: 1.08;
+		--tr-h1: -0.05em;
+		--tr-h2: -0.045em;
+	}
+}
+
+@media (min-width: 1024px) {
+	:root {
+		--header-h: 76px;
+		--lh-h1: 1;
+		--lh-h2: 1.05;
+	}
+}

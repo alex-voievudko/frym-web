@@ -1,0 +1,84 @@
+---
+import { Font } from 'astro:assets';
+import { site } from '../lib/site';
+import '../styles/global.css';
+
+interface Props {
+	title?: string;
+	description?: string;
+	/** Set on pages that should not be indexed (e.g. the dev kit). */
+	noindex?: boolean;
+}
+
+const {
+	title = site.title,
+	description = site.description,
+	noindex = false,
+} = Astro.props;
+
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
+const ogImage = new URL('/og.png', Astro.site).href;
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>{title}</title>
+		<meta name="description" content={description} />
+		<link rel="canonical" href={canonical} />
+		{noindex && <meta name="robots" content="noindex, nofollow" />}
+
+		<link rel="icon" href="/favicon.ico" sizes="32x32" />
+		<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+		<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+		<meta name="theme-color" content="#F7F5EF" />
+
+		<meta property="og:type" content="website" />
+		<meta property="og:site_name" content={site.name} />
+		<meta property="og:title" content={site.ogTitle} />
+		<meta property="og:description" content={site.ogDescription} />
+		<meta property="og:url" content={canonical} />
+		<meta property="og:image" content={ogImage} />
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content={site.ogTitle} />
+		<meta name="twitter:description" content={site.ogDescription} />
+		<meta name="twitter:image" content={ogImage} />
+
+		{/* Sans carries the LCP heading, so it alone is preloaded. Mono is
+		    used only for 10–11px tracked labels, where a swap is imperceptible
+		    and a second preload would compete with the LCP request. */}
+		<Font cssVariable="--font-sans" preload />
+		<Font cssVariable="--font-mono" />
+
+		<meta name="generator" content={Astro.generator} />
+	</head>
+	<body>
+		<a class="skip-link" href="#main">Skip to content</a>
+		<slot />
+	</body>
+</html>
+
+<style>
+	.skip-link {
+		position: absolute;
+		top: 0;
+		left: var(--s-5);
+		z-index: 100;
+		transform: translateY(-150%);
+		background: var(--c-ink);
+		color: var(--c-paper);
+		font-family: var(--font-mono);
+		font-weight: 500;
+		font-size: var(--fs-mono-sm);
+		letter-spacing: 0.14em;
+		text-transform: uppercase;
+		padding: var(--s-3) var(--s-4);
+		border-radius: 0 0 var(--r-tag) var(--r-tag);
+	}
+
+	.skip-link:focus-visible {
+		transform: translateY(0);
+	}
+</style>

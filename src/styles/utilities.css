@@ -1,0 +1,71 @@
+/* Shared classes used across sections. Depends on tokens.css. */
+
+/*
+ * One rule reproduces all three artboards:
+ *   390  → 20px gutter, 350px content
+ *   834  → 48px gutter, 738px content
+ *   1440 → 48px gutter, 1160px content, centred (140px from each edge)
+ * Saturates at 1256px, which is why no 1280px breakpoint is needed.
+ */
+.container {
+	width: 100%;
+	max-width: calc(var(--measure) + var(--gutter) * 2);
+	margin-inline: auto;
+	padding-inline: var(--gutter);
+}
+
+/* Mono label. Always uppercase, always tracked — never a sentence. */
+.mono {
+	font-family: var(--font-mono);
+	font-weight: 500;
+	text-transform: uppercase;
+	line-height: 1;
+}
+
+.eyebrow {
+	font-family: var(--font-mono);
+	font-weight: 500;
+	font-size: var(--fs-eyebrow);
+	letter-spacing: 0.22em;
+	text-transform: uppercase;
+	color: var(--c-secondary);
+	line-height: 1;
+}
+
+.eyebrow--ink {
+	color: var(--c-ink);
+}
+
+/*
+ * The emphasis rule: within a group of divider-topped columns, exactly one
+ * carries an ink rule instead of a hairline. Recurs in five sections; driven
+ * by `emphasis: true` in src/data/*.ts, never hand-applied.
+ */
+.rule-top {
+	border-top: 1px solid var(--c-divider);
+}
+
+.rule-top[data-emphasis] {
+	border-top-color: var(--c-ink);
+}
+
+.prose {
+	max-width: var(--prose);
+}
+
+.visually-hidden {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	margin: -1px;
+	padding: 0;
+	overflow: hidden;
+	clip-path: inset(50%);
+	white-space: nowrap;
+	border: 0;
+}
+
+/* Figures use lining tabular numerals so columns of money align. */
+.tnum {
+	font-variant-numeric: tabular-nums;
+}
