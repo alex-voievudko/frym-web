@@ -1,0 +1,310 @@
+---
+import Section from '../primitives/Section.astro';
+import PillButton from '../primitives/PillButton.astro';
+import AllocationBar from '../primitives/AllocationBar.astro';
+import StatFigure from '../primitives/StatFigure.astro';
+import { formatEur, percentOf } from '../../lib/format';
+import { WAITLIST_ANCHOR } from '../../lib/site';
+
+const FREE = 1800;
+const RESERVED = 900;
+const LOCKED = 1300;
+const TOTAL = FREE + RESERVED + LOCKED;
+
+const legend = [
+	{
+		state: 'reserved',
+		title: 'Reserved',
+		meta: 'Groceries, transport, dining',
+		value: RESERVED,
+	},
+	{
+		state: 'locked',
+		title: 'Locked',
+		meta: 'Rent, bills, subscriptions',
+		value: LOCKED,
+	},
+] as const;
+---
+
+<Section pad="hero" class="hero">
+	<div class="hero__grid">
+		<div class="hero__copy">
+			<p class="eyebrow">Personal finance, simplified</p>
+
+			<h1 class="hero__title">Know what you can actually spend.</h1>
+
+			{/*
+			  Explicit {' '} before inline elements: Astro 7 compresses HTML by
+			  JSX rules, which drops a newline sitting against an element
+			  boundary. A literal space mid-line survives; a line break does not.
+			*/}
+			<p class="hero__lead">
+				Your bank balance shows how much money you have.{' '}
+				<strong>Frym shows how much is genuinely free</strong> after bills,
+				subscriptions and planned spending are already accounted for.
+			</p>
+
+			<div class="hero__cta">
+				<PillButton href={WAITLIST_ANCHOR} size="lg" block>
+					Join the waitlist
+				</PillButton>
+				<p class="hero__note">
+					<span>Launching first on iPhone</span>
+					<span>No spam · Early access only</span>
+				</p>
+			</div>
+		</div>
+
+		{/* The panel is the product in miniature: one balance, split three ways. */}
+		<div class="panel">
+			<div class="panel__total">
+				<span class="panel__total-label">Total cash</span>
+				<span class="panel__total-value tnum">{formatEur(TOTAL)}</span>
+			</div>
+
+			<AllocationBar free={FREE} reserved={RESERVED} locked={LOCKED} />
+
+			<ul class="panel__legend">
+				{
+					legend.map((item) => (
+						<li class="legend">
+							<span class="legend__swatch" data-state={item.state} />
+							<span class="legend__text">
+								<span class="legend__title">{item.title}</span>
+								<span class="legend__meta">{item.meta}</span>
+							</span>
+							<span class="legend__value tnum">{formatEur(item.value)}</span>
+						</li>
+					))
+				}
+			</ul>
+
+			<div class="panel__free">
+				<p class="panel__free-labels">
+					<span class="panel__free-label">Free to spend</span>
+					<span class="panel__free-share">
+						{percentOf(FREE, TOTAL)}% of total cash
+					</span>
+				</p>
+				<StatFigure value={FREE} size="hero" />
+				<p class="panel__caption">
+					Recalculated as money comes in, commitments are paid and everyday
+					spending happens.
+				</p>
+			</div>
+		</div>
+	</div>
+</Section>
+
+<style>
+	.hero__grid {
+		display: grid;
+		gap: 34px;
+	}
+
+	.hero__copy {
+		display: flex;
+		flex-direction: column;
+		gap: var(--s-5);
+	}
+
+	.hero__title {
+		font-size: var(--fs-h1);
+		line-height: var(--lh-h1);
+		letter-spacing: var(--tr-h1);
+	}
+
+	.hero__lead {
+		font-size: var(--fs-lead);
+		line-height: 1.6;
+		max-width: 34ch;
+	}
+
+	.hero__lead strong {
+		font-weight: 600;
+		color: var(--c-ink);
+	}
+
+	.hero__cta {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: var(--s-4);
+		margin-top: var(--s-2);
+	}
+
+	.hero__note {
+		display: flex;
+		flex-direction: column;
+		gap: 5px;
+		text-align: center;
+		font-family: var(--font-mono);
+		font-weight: 500;
+		font-size: var(--fs-mono-sm);
+		letter-spacing: 0.14em;
+		text-transform: uppercase;
+		line-height: 1.3;
+		color: var(--c-secondary);
+	}
+
+	/* ── panel ──────────────────────────────────────────────── */
+
+	/* Ink rule, not the hairline — this panel is the page's anchor. */
+	.panel {
+		display: flex;
+		flex-direction: column;
+		gap: 22px;
+		border-top: 1px solid var(--c-ink);
+		padding-top: 22px;
+	}
+
+	.panel__total {
+		display: flex;
+		align-items: baseline;
+		justify-content: space-between;
+		gap: var(--s-4);
+	}
+
+	.panel__total-label {
+		font-family: var(--font-mono);
+		font-weight: 500;
+		font-size: var(--fs-mono-label);
+		letter-spacing: 0.2em;
+		text-transform: uppercase;
+		color: var(--c-secondary);
+	}
+
+	.panel__total-value {
+		font-family: var(--font-mono);
+		font-weight: 500;
+		font-size: 0.875rem; /* 14 */
+		color: var(--c-ink);
+	}
+
+	.panel__legend {
+		display: flex;
+		flex-direction: column;
+	}
+
+	.legend {
+		display: flex;
+		align-items: center;
+		gap: 10px;
+		min-height: 56px;
+		border-bottom: 1px solid var(--c-divider-soft);
+	}
+
+	.legend:last-child {
+		border-bottom-color: var(--c-divider);
+	}
+
+	.legend__swatch {
+		width: 8px;
+		height: 8px;
+		flex: none;
+	}
+
+	.legend__swatch[data-state='reserved'] {
+		background: var(--c-reserved);
+	}
+	.legend__swatch[data-state='locked'] {
+		background: var(--c-locked);
+	}
+
+	.legend__text {
+		display: flex;
+		flex-direction: column;
+		gap: 4px;
+		min-width: 0;
+		flex: 1;
+	}
+
+	.legend__title {
+		font-size: 0.75rem; /* 12 */
+		font-weight: 500;
+		color: var(--c-ink);
+		line-height: 1.2;
+	}
+
+	.legend__meta {
+		font-family: var(--font-mono);
+		font-weight: 400;
+		font-size: var(--fs-mono-xs);
+		letter-spacing: 0.12em;
+		text-transform: uppercase;
+		color: var(--c-secondary);
+		line-height: 1.2;
+	}
+
+	.legend__value {
+		font-family: var(--font-mono);
+		font-weight: 500;
+		font-size: 0.8125rem; /* 13 */
+		color: var(--c-ink);
+		flex: none;
+	}
+
+	.panel__free {
+		display: flex;
+		flex-direction: column;
+		gap: var(--s-3);
+	}
+
+	.panel__free-labels {
+		display: flex;
+		align-items: baseline;
+		justify-content: space-between;
+		gap: var(--s-3);
+		font-family: var(--font-mono);
+		font-weight: 500;
+		font-size: var(--fs-mono-label);
+		letter-spacing: 0.2em;
+		text-transform: uppercase;
+		line-height: 1.2;
+	}
+
+	.panel__free-label {
+		color: var(--c-ink);
+	}
+
+	.panel__free-share {
+		color: var(--c-secondary);
+		text-align: right;
+	}
+
+	.panel__caption {
+		font-size: var(--fs-caption);
+		line-height: 1.65;
+		max-width: 42ch;
+	}
+
+	@media (min-width: 768px) {
+		.hero__grid {
+			gap: 52px;
+		}
+
+		.hero__cta {
+			flex-direction: row;
+			align-items: center;
+			gap: var(--s-5);
+		}
+
+		.hero__note {
+			text-align: left;
+		}
+	}
+
+	@media (min-width: 1024px) {
+		.hero__grid {
+			grid-template-columns: 1.06fr 0.94fr;
+			gap: 76px;
+			align-items: start;
+		}
+
+		.hero__copy {
+			gap: var(--s-6);
+			padding-top: 6px;
+		}
+	}
+</style>

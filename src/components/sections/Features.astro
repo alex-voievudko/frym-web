@@ -1,0 +1,98 @@
+---
+import Section from '../primitives/Section.astro';
+import SectionHeader from '../primitives/SectionHeader.astro';
+import IconTile from '../primitives/IconTile.astro';
+import { features } from '../../data/features';
+---
+
+<Section labelledby="features-title" class="features">
+	<SectionHeader
+		eyebrow="Built for everyday money"
+		title="Everything you need to keep your financial picture current."
+		id="features-title"
+	/>
+
+	<ul class="features__grid">
+		{
+			features.map((f) => (
+				<li class="feature rule-top" data-emphasis={f.emphasis || undefined}>
+					<IconTile name={f.icon} size={30} class="feature__tile" />
+					<div class="feature__text">
+						<h3 class="feature__label">{f.label}</h3>
+						<p class="feature__body">{f.body}</p>
+					</div>
+				</li>
+			))
+		}
+	</ul>
+</Section>
+
+<style>
+	.features {
+		border-top: 1px solid var(--c-divider);
+	}
+
+	.features__grid {
+		display: grid;
+	}
+
+	/*
+	 * Mobile is the one layout that changes kind rather than column count:
+	 * the icon moves beside the text and each item becomes a ruled row.
+	 */
+	.feature {
+		display: flex;
+		flex-direction: row;
+		align-items: flex-start;
+		gap: var(--s-3);
+		padding: var(--s-4) 0;
+	}
+
+	.feature__text {
+		display: flex;
+		flex-direction: column;
+		gap: var(--s-2);
+	}
+
+	.feature__label {
+		font-family: var(--font-mono);
+		font-weight: 500;
+		font-size: var(--fs-mono-label);
+		letter-spacing: 0.2em;
+		text-transform: uppercase;
+		line-height: 1;
+	}
+
+	.feature__body {
+		font-size: var(--fs-body);
+		line-height: 1.7;
+	}
+
+	@media (min-width: 768px) {
+		.features__grid {
+			grid-template-columns: 1fr 1fr;
+			column-gap: 48px;
+		}
+
+		.feature {
+			flex-direction: column;
+			gap: var(--s-3);
+			padding: 18px 0 26px;
+		}
+
+		.feature :global(.tile) {
+			--tile: 34px;
+		}
+	}
+
+	@media (min-width: 1024px) {
+		.features__grid {
+			grid-template-columns: repeat(3, 1fr);
+			column-gap: 44px;
+		}
+
+		.feature {
+			padding: 20px 0 30px;
+		}
+	}
+</style>

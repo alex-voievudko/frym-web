@@ -1,0 +1,214 @@
+---
+import Section from '../primitives/Section.astro';
+import SectionHeader from '../primitives/SectionHeader.astro';
+import DataRow from '../primitives/DataRow.astro';
+import IconTile from '../primitives/IconTile.astro';
+import Badge from '../primitives/Badge.astro';
+import AllocationBar from '../primitives/AllocationBar.astro';
+import StatFigure from '../primitives/StatFigure.astro';
+import { formatEur } from '../../lib/format';
+
+// Members and accounts are told apart by initial, not by colour — the design
+// system limits avatar grounds to these three.
+const accounts = [
+	{ initials: 'SN', name: 'Santander', ground: 'ink', value: 622.25 },
+	{ initials: 'RV', name: 'Revolut', ground: 'green', value: 1180.0 },
+	{ initials: 'CA', name: 'Cash', ground: 'track', value: 60.0 },
+] as const;
+---
+
+<Section id="how" labelledby="how-title" class="how">
+	<SectionHeader
+		eyebrow="How Frym works"
+		title="Start with reality. Add structure only where you need it."
+		id="how-title"
+	/>
+
+	<ol class="how__grid">
+		<li class="step rule-top">
+			<span class="step__index">Step 01</span>
+			<h3 class="step__title">Add the money you actually have</h3>
+			<p class="step__body">
+				Create your accounts and enter their current balances.
+			</p>
+			<div class="step__mock">
+				{
+					accounts.map((a) => (
+						<DataRow label={a.name} value={formatEur(a.value)} height={40}>
+							<span slot="lead" class="avatar" data-ground={a.ground}>
+								{a.initials}
+							</span>
+						</DataRow>
+					))
+				}
+			</div>
+		</li>
+
+		<li class="step rule-top">
+			<span class="step__index">Step 02</span>
+			<h3 class="step__title">Protect what still needs to be paid</h3>
+			<p class="step__body">
+				Add the bills, subscriptions and other commitments that are still
+				ahead. Frym marks that money as Locked.
+			</p>
+			<div class="step__mock">
+				<DataRow label="Rent" height={40} rule="none">
+					<IconTile slot="lead" name="home" size={30} />
+					<Badge tone="neutral">Locked</Badge>
+				</DataRow>
+			</div>
+		</li>
+
+		<li class="step rule-top">
+			<span class="step__index">Step 03</span>
+			<h3 class="step__title">Plan flexible spending</h3>
+			<p class="step__body">
+				Reserve what you want available for things like groceries, transport or
+				dining. Frym marks that money as Reserved.
+			</p>
+			<div class="step__mock step__mock--plan">
+				<DataRow label="Groceries" height={40} rule="none">
+					<Badge tone="reserved">Reserved</Badge>
+				</DataRow>
+				<span class="step__track"><span class="step__fill"></span></span>
+			</div>
+		</li>
+
+		<li class="step rule-top" data-emphasis>
+			<span class="step__index">Step 04</span>
+			<h3 class="step__title">See what remains</h3>
+			<p class="step__body">
+				Everything else becomes Free. That number updates as you spend, receive
+				income or change your plan.
+			</p>
+			<div class="step__mock step__mock--free">
+				<AllocationBar free={1800} reserved={900} locked={1300} height={10} />
+				<div class="step__free">
+					<span class="step__free-label">Free</span>
+					<StatFigure value={1800} size="sm" />
+				</div>
+			</div>
+		</li>
+	</ol>
+</Section>
+
+<style>
+	.how {
+		border-top: 1px solid var(--c-divider);
+	}
+
+	.how__grid {
+		display: grid;
+		gap: 24px;
+	}
+
+	.step {
+		display: flex;
+		flex-direction: column;
+		gap: 14px;
+		padding-top: 20px;
+	}
+
+	.step__index {
+		font-family: var(--font-mono);
+		font-weight: 500;
+		font-size: var(--fs-mono-label);
+		letter-spacing: 0.2em;
+		text-transform: uppercase;
+		color: var(--c-secondary);
+		line-height: 1;
+	}
+
+	.step__title {
+		font-size: var(--fs-step-title);
+		line-height: 1.3;
+		letter-spacing: -0.02em;
+	}
+
+	.step__body {
+		line-height: 1.7;
+	}
+
+	.step__mock {
+		margin-top: auto;
+		padding-top: var(--s-2);
+	}
+
+	.step__mock--plan,
+	.step__mock--free {
+		display: flex;
+		flex-direction: column;
+		gap: var(--s-3);
+	}
+
+	.avatar {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		width: 26px;
+		height: 26px;
+		flex: none;
+		border-radius: var(--r-tile);
+		font-family: var(--font-mono);
+		font-weight: 500;
+		font-size: var(--fs-mono-xs);
+		letter-spacing: 0.04em;
+		line-height: 1;
+	}
+
+	.avatar[data-ground='ink'] {
+		background: var(--c-ink);
+		color: var(--c-paper);
+	}
+	.avatar[data-ground='green'] {
+		background: var(--c-green-dark);
+		color: var(--c-paper);
+	}
+	.avatar[data-ground='track'] {
+		background: var(--c-track);
+		color: var(--c-ink);
+	}
+
+	.step__track {
+		display: block;
+		height: 4px;
+		background: var(--c-track);
+	}
+
+	.step__fill {
+		display: block;
+		height: 100%;
+		width: 72%;
+		background: var(--c-green-light);
+	}
+
+	.step__free {
+		display: flex;
+		align-items: baseline;
+		justify-content: space-between;
+		gap: var(--s-3);
+	}
+
+	.step__free-label {
+		font-family: var(--font-mono);
+		font-weight: 500;
+		font-size: var(--fs-mono-label);
+		letter-spacing: 0.2em;
+		text-transform: uppercase;
+		color: var(--c-ink);
+	}
+
+	@media (min-width: 768px) {
+		.how__grid {
+			grid-template-columns: 1fr 1fr;
+			gap: 36px 48px;
+		}
+	}
+
+	@media (min-width: 1024px) {
+		.how__grid {
+			grid-template-columns: repeat(4, 1fr);
+			gap: 36px;
+		}
+	}
+</style>

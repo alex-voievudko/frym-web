@@ -1,0 +1,53 @@
+---
+/**
+ * Renders one section at the top of an otherwise empty page, so it can be
+ * captured and compared against its artboard without scrolling.
+ * Temporary — deleted with the rest of /dev in the polish step.
+ */
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Hero from '../../../components/sections/Hero.astro';
+import BalanceNotBudget from '../../../components/sections/BalanceNotBudget.astro';
+import ThreeStates from '../../../components/sections/ThreeStates.astro';
+import HowItWorks from '../../../components/sections/HowItWorks.astro';
+import SimpleExample from '../../../components/sections/SimpleExample.astro';
+import WhyFrym from '../../../components/sections/WhyFrym.astro';
+import Features from '../../../components/sections/Features.astro';
+import WhatComesNext from '../../../components/sections/WhatComesNext.astro';
+import Faq from '../../../components/sections/Faq.astro';
+import ClosingCta from '../../../components/sections/ClosingCta.astro';
+
+const sections = {
+	hero: Hero,
+	balance: BalanceNotBudget,
+	states: ThreeStates,
+	how: HowItWorks,
+	example: SimpleExample,
+	why: WhyFrym,
+	features: Features,
+	next: WhatComesNext,
+	faq: Faq,
+	closing: ClosingCta,
+};
+
+export function getStaticPaths() {
+	return [
+		'hero',
+		'balance',
+		'states',
+		'how',
+		'example',
+		'why',
+		'features',
+		'next',
+		'faq',
+		'closing',
+	].map((section) => ({ params: { section } }));
+}
+
+const { section } = Astro.params;
+const Component = sections[section as keyof typeof sections];
+---
+
+<BaseLayout title={`Frym — ${section}`} noindex bare>
+	<Component />
+</BaseLayout>

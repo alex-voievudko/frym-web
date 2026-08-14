@@ -50,6 +50,10 @@ const hasNote = Astro.slots.has('default');
 		display: flex;
 		flex-direction: column;
 		gap: var(--s-6);
+		/* Owned here rather than set by each section: a section's scoped rule
+		   cannot reach into this component, but a custom property inherits
+		   through the DOM, so `--head-gap` on the section still wins. */
+		margin-bottom: var(--head-gap, clamp(1.625rem, 0.9286rem + 2.8571vw, 3.5rem));
 	}
 
 	.head__main {

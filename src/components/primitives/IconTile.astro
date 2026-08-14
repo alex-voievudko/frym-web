@@ -14,14 +14,18 @@ const { name, size = 34, class: className } = Astro.props;
 
 <span
 	class:list={['tile', className]}
-	style={`--tile:${size}px`}
+	style={`--tile-size:${size}px`}
 	aria-hidden="true"
 >
-	<Icon {name} size={Math.round(size * 0.47)} />
+	<Icon {name} size={24} />
 </span>
 
 <style>
 	.tile {
+		/* The prop lands on --tile-size, never on --tile, so a section can
+		   still rescale the tile at a breakpoint — an inline custom property
+		   would otherwise outrank any stylesheet rule. */
+		--tile: var(--tile-size, 34px);
 		display: inline-flex;
 		align-items: center;
 		justify-content: center;
@@ -31,5 +35,12 @@ const { name, size = 34, class: className } = Astro.props;
 		border-radius: var(--r-tile);
 		background: var(--c-track);
 		color: var(--c-ink);
+	}
+
+	/* Glyph size is derived in CSS, not baked into the SVG attributes, so a
+	   breakpoint can rescale the tile and its icon together by setting --tile. */
+	.tile :global(svg) {
+		width: calc(var(--tile) * 0.47);
+		height: calc(var(--tile) * 0.47);
 	}
 </style>

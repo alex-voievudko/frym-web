@@ -1,0 +1,133 @@
+---
+import Section from '../primitives/Section.astro';
+import SectionHeader from '../primitives/SectionHeader.astro';
+import { faq } from '../../data/faq';
+---
+
+<Section id="faq" labelledby="faq-title" class="faq">
+	<div class="faq__grid">
+		<SectionHeader
+			eyebrow="Questions"
+			title="Things people ask."
+			id="faq-title"
+			size="faq"
+		/>
+
+		{/*
+		  Native <details>. No JS, keyboard support for free. The affordance is
+		  the mono index on the right — the artboards use no chevron.
+		*/}
+		<div class="faq__list">
+			{
+				faq.map((item, i) => (
+					<details class="faq__item" open={i === 0}>
+						<summary class="faq__summary">
+							<span class="faq__q">{item.q}</span>
+							<span class="faq__n">{String(i + 1).padStart(2, '0')}</span>
+						</summary>
+						<div class="faq__a">
+							<p>{item.a}</p>
+						</div>
+					</details>
+				))
+			}
+		</div>
+	</div>
+</Section>
+
+<style>
+	.faq {
+		border-top: 1px solid var(--c-divider);
+	}
+
+	.faq__grid {
+		display: grid;
+		gap: var(--s-5);
+	}
+
+	.faq__list {
+		border-top: 1px solid var(--c-divider);
+	}
+
+	.faq__item {
+		border-bottom: 1px solid var(--c-divider-soft);
+	}
+
+	.faq__item:last-child {
+		border-bottom: none;
+	}
+
+	.faq__summary {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 14px;
+		padding: 18px 0;
+		cursor: pointer;
+		list-style: none;
+	}
+
+	.faq__summary::-webkit-details-marker {
+		display: none;
+	}
+
+	.faq__q {
+		font-size: var(--fs-faq-q);
+		font-weight: 600;
+		line-height: 1.35;
+		letter-spacing: -0.02em;
+		color: var(--c-ink);
+	}
+
+	.faq__n {
+		font-family: var(--font-mono);
+		font-weight: 400;
+		font-size: var(--fs-mono-label);
+		letter-spacing: 0.14em;
+		color: var(--c-secondary);
+		flex: none;
+	}
+
+	.faq__a {
+		padding-bottom: 18px;
+		line-height: 1.75;
+		max-width: 68ch;
+	}
+
+	/* Progressive enhancement: animates where ::details-content is supported,
+	   opens instantly everywhere else. No JS either way. */
+	@supports selector(::details-content) {
+		.faq__item::details-content {
+			block-size: 0;
+			overflow: hidden;
+			transition:
+				block-size var(--t-base) var(--ease),
+				content-visibility var(--t-base) allow-discrete;
+			interpolate-size: allow-keywords;
+		}
+
+		.faq__item[open]::details-content {
+			block-size: auto;
+		}
+	}
+
+	@media (min-width: 768px) {
+		.faq__summary {
+			gap: 20px;
+			padding: 20px 0;
+		}
+	}
+
+	@media (min-width: 1024px) {
+		.faq__grid {
+			grid-template-columns: 0.4fr 1fr;
+			gap: 76px;
+			align-items: start;
+		}
+
+		.faq__summary {
+			gap: 24px;
+			padding: 22px 0;
+		}
+	}
+</style>

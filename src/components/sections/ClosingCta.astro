@@ -1,0 +1,57 @@
+---
+import Section from '../primitives/Section.astro';
+import PillButton from '../primitives/PillButton.astro';
+import { WAITLIST_ANCHOR } from '../../lib/site';
+---
+
+<Section pad="cta" labelledby="closing-title" class="closing">
+	<h2 class="closing__title" id="closing-title">
+		Your balance tells you what you have.
+		<span class="closing__muted">Frym tells you what is free.</span>
+	</h2>
+
+	<p class="closing__lead">
+		Join the waitlist and be among the first to try a simpler way to understand
+		your money.
+	</p>
+
+	<PillButton href={WAITLIST_ANCHOR} size="lg" block>Join the waitlist</PillButton>
+</Section>
+
+<style>
+	.closing {
+		border-top: 1px solid var(--c-divider);
+	}
+
+	.closing :global(.container) {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		gap: var(--s-6);
+	}
+
+	.closing__title {
+		font-size: var(--fs-h2-cta);
+		line-height: 1.04;
+		letter-spacing: -0.05em;
+		max-width: 900px;
+	}
+
+	/* The second clause drops to secondary so the contrast carries the point. */
+	.closing__muted {
+		display: block;
+		color: var(--c-secondary);
+	}
+
+	.closing__lead {
+		font-size: var(--fs-lead-sm);
+		line-height: 1.7;
+		max-width: 480px;
+	}
+
+	@media (min-width: 768px) {
+		.closing :global(.container) {
+			gap: var(--s-7);
+		}
+	}
+</style>

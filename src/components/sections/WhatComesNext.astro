@@ -1,0 +1,88 @@
+---
+import Section from '../primitives/Section.astro';
+import SectionHeader from '../primitives/SectionHeader.astro';
+import { whatsNext } from '../../data/whats-next';
+---
+
+<Section pad="next" labelledby="next-title" class="next">
+	<div class="next__grid">
+		<SectionHeader
+			eyebrow="What comes next"
+			title="Personal finance today. Smarter money management tomorrow."
+			id="next-title"
+			size="next"
+		/>
+
+		<div class="next__body">
+			<p class="next__prose">
+				Frym is starting with a simple personal-finance foundation. Over time,
+				we want it to become easier to manage money together and to interact
+				with your finances naturally.
+			</p>
+
+			<ul class="next__tags">
+				{whatsNext.map((tag) => <li class="next__tag">{tag}</li>)}
+			</ul>
+
+			<p class="next__disclaimer">
+				Not available yet. These are directions, not promises.
+			</p>
+		</div>
+	</div>
+</Section>
+
+<style>
+	.next {
+		border-top: 1px solid var(--c-divider);
+	}
+
+	.next__grid {
+		display: grid;
+		gap: var(--s-5);
+	}
+
+	.next__body {
+		display: flex;
+		flex-direction: column;
+		gap: var(--s-4);
+	}
+
+	.next__prose {
+		line-height: 1.75;
+		max-width: var(--prose);
+	}
+
+	.next__tags {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 7px;
+	}
+
+	/* Outline pills, not tinted tags — nothing here is a state. */
+	.next__tag {
+		border: 1px solid var(--c-divider);
+		border-radius: var(--r-pill);
+		padding: 8px 13px;
+		font-family: var(--font-mono);
+		font-weight: 500;
+		font-size: var(--fs-mono-sm);
+		letter-spacing: 0.14em;
+		text-transform: uppercase;
+		color: var(--c-body);
+		line-height: 1;
+	}
+
+	.next__disclaimer {
+		font-size: 0.6875rem; /* 11 */
+		line-height: 1.6;
+		color: var(--c-secondary);
+	}
+
+	@media (min-width: 1024px) {
+		.next__grid {
+			grid-template-columns: 1.06fr 0.94fr;
+			gap: 76px;
+			align-items: start;
+		}
+	}
+</style>

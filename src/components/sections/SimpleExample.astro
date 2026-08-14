@@ -1,0 +1,210 @@
+---
+import Section from '../primitives/Section.astro';
+import SectionHeader from '../primitives/SectionHeader.astro';
+import DataRow from '../primitives/DataRow.astro';
+import IconTile from '../primitives/IconTile.astro';
+import StatFigure from '../primitives/StatFigure.astro';
+import { formatEur } from '../../lib/format';
+import type { IconName } from '../primitives/Icon.astro';
+
+/**
+ * Three snapshots of the same money. The point of the middle column is that
+ * Free does not move — the spend came out of Reserved, where it was already
+ * accounted for.
+ */
+interface Scenario {
+	state: string;
+	rows: { label: string; value: number; tone?: 'reserved' }[];
+	free: number;
+	txn?: { icon: IconName; name: string; meta: string; tone: 'reserved' | 'negative'; value: number };
+	caption: string;
+	emphasis?: boolean;
+}
+
+const scenarios: Scenario[] = [
+	{
+		state: 'Today',
+		rows: [
+			{ label: 'Total cash', value: 622.25 },
+			{ label: 'Locked', value: 90 },
+			{ label: 'Reserved', value: 180 },
+		],
+		free: 352.25,
+		caption: 'Your starting picture: what you hold, and what is already spoken for.',
+		emphasis: true,
+	},
+	{
+		state: 'You spend €40 on groceries',
+		rows: [
+			{ label: 'Total cash', value: 582.25 },
+			{ label: 'Locked', value: 90 },
+			{ label: 'Reserved', value: 140, tone: 'reserved' },
+		],
+		free: 352.25,
+		txn: {
+			icon: 'bag',
+			name: 'Mercadona',
+			meta: 'Groceries · Planned',
+			tone: 'reserved',
+			value: -40,
+		},
+		caption: 'Free stays the same, because the groceries were already Reserved.',
+	},
+	{
+		state: 'You spend €30 unplanned',
+		rows: [
+			{ label: 'Total cash', value: 552.25 },
+			{ label: 'Locked', value: 90 },
+			{ label: 'Reserved', value: 140 },
+		],
+		free: 322.25,
+		txn: {
+			icon: 'box',
+			name: 'Zara',
+			meta: 'Shopping · Unplanned',
+			tone: 'negative',
+			value: -30,
+		},
+		caption: 'That spending came directly out of Free.',
+	},
+];
+---
+
+<Section labelledby="example-title" class="example">
+	<SectionHeader
+		eyebrow="A simple example"
+		title="Your money changes. Frym keeps the picture clear."
+		id="example-title"
+	/>
+
+	<ol class="example__grid">
+		{
+			scenarios.map((s) => (
+				<li class="scenario rule-top" data-emphasis={s.emphasis || undefined}>
+					<span class="scenario__state">{s.state}</span>
+
+					<div class="scenario__ledger">
+						{s.rows.map((r) => (
+							<DataRow
+								label={r.label}
+								value={formatEur(r.value)}
+								height={40}
+								class={r.tone === 'reserved' ? 'is-reserved' : undefined}
+							/>
+						))}
+						<DataRow label="Free" height={52} rule="none" strong>
+							<StatFigure value={s.free} size="md" />
+						</DataRow>
+					</div>
+
+					{s.txn && (
+						<DataRow
+							label={s.txn.name}
+							meta={s.txn.meta}
+							metaTone={s.txn.tone}
+							value={formatEur(s.txn.value)}
+							height={40}
+							rule="none"
+						>
+							<IconTile slot="lead" name={s.txn.icon} size={30} />
+						</DataRow>
+					)}
+
+					<p class="scenario__caption">{s.caption}</p>
+				</li>
+			))
+		}
+	</ol>
+
+	<div class="example__quote">
+		<p class="example__lede">
+			The result is a number that answers a much more useful question than your
+			account balance:
+		</p>
+		<p class="example__pull">What can I safely use right now?</p>
+	</div>
+</Section>
+
+<style>
+	.example {
+		border-top: 1px solid var(--c-divider);
+	}
+
+	.example__grid {
+		display: grid;
+		gap: 24px;
+	}
+
+	.scenario {
+		display: flex;
+		flex-direction: column;
+		gap: var(--s-4);
+		padding-top: 20px;
+	}
+
+	.scenario__state {
+		font-family: var(--font-mono);
+		font-weight: 500;
+		font-size: var(--fs-mono-label);
+		letter-spacing: 0.16em;
+		text-transform: uppercase;
+		color: var(--c-ink);
+		line-height: 1.3;
+	}
+
+	/* The row that absorbed the spend picks up the Reserved green. */
+	.scenario__ledger :global(.is-reserved .row__amount) {
+		color: var(--c-green-dark);
+	}
+
+	.scenario__caption {
+		font-size: var(--fs-caption);
+		line-height: 1.65;
+		margin-top: auto;
+	}
+
+	.example__quote {
+		display: grid;
+		gap: var(--s-5);
+		border-top: 1px solid var(--c-divider);
+		margin-top: var(--s-7);
+		padding-top: var(--s-6);
+	}
+
+	.example__lede {
+		font-size: var(--fs-lead-sm);
+		line-height: 1.75;
+	}
+
+	.example__pull {
+		font-size: var(--fs-h2-faq);
+		font-weight: 600;
+		line-height: 1.2;
+		letter-spacing: -0.04em;
+		color: var(--c-ink);
+		text-wrap: balance;
+	}
+
+	@media (min-width: 768px) {
+		.example__grid {
+			grid-template-columns: repeat(3, 1fr);
+			gap: 28px;
+		}
+
+		.example__quote {
+			grid-template-columns: 1fr 1fr;
+			gap: 48px;
+			align-items: start;
+		}
+	}
+
+	@media (min-width: 1024px) {
+		.example__grid {
+			gap: 44px;
+		}
+
+		.example__quote {
+			gap: 76px;
+		}
+	}
+</style>

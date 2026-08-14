@@ -1,0 +1,100 @@
+---
+import Section from '../primitives/Section.astro';
+import SectionHeader from '../primitives/SectionHeader.astro';
+import DataRow from '../primitives/DataRow.astro';
+import StatFigure from '../primitives/StatFigure.astro';
+import { formatEur } from '../../lib/format';
+
+const ledger = [
+	{ label: 'In your account', value: 4000, rule: 'divider' as const },
+	{ label: 'Upcoming commitments', value: -1300, rule: 'soft' as const },
+	// Ink rule closes the arithmetic — this is the sum line.
+	{ label: 'Planned spending', value: -900, rule: 'ink' as const },
+];
+---
+
+<Section labelledby="balance-title" class="balance">
+	<div class="balance__grid">
+		<SectionHeader
+			eyebrow="Your balance is not your budget"
+			title="Having €4,000 does not mean you have €4,000 to spend."
+			id="balance-title"
+		/>
+
+		<div class="balance__body">
+			<p class="balance__prose">
+				Some of that money already belongs to rent. Some is needed for bills.
+				Some is what you planned for groceries, transport or dining. The problem
+				is that your bank account still shows all of it as one balance.
+			</p>
+			<p class="balance__prose balance__prose--strong">
+				Frym separates what is already spoken for from what is actually yours
+				to use.
+			</p>
+
+			<div class="balance__ledger">
+				{
+					ledger.map((row) => (
+						<DataRow
+							label={row.label}
+							value={formatEur(row.value)}
+							height={48}
+							rule={row.rule}
+						/>
+					))
+				}
+				<DataRow label="Genuinely free" height={60} rule="none" strong>
+					<StatFigure value={1800} size="lg" />
+				</DataRow>
+			</div>
+		</div>
+	</div>
+</Section>
+
+<style>
+	.balance {
+		border-top: 1px solid var(--c-divider);
+	}
+
+	.balance__grid {
+		display: grid;
+		gap: var(--s-6);
+	}
+
+	.balance__body {
+		display: flex;
+		flex-direction: column;
+		gap: var(--s-4);
+	}
+
+	.balance__prose {
+		max-width: var(--prose);
+		line-height: 1.75;
+	}
+
+	.balance__prose--strong {
+		font-weight: 600;
+		color: var(--c-ink);
+	}
+
+	.balance__ledger {
+		margin-top: var(--s-2);
+		/* The ledger's first rule doubles as the block's top edge. */
+		border-top: 1px solid var(--c-divider);
+	}
+
+	@media (min-width: 768px) {
+		.balance__grid {
+			grid-template-columns: 1fr 1fr;
+			gap: 48px;
+			align-items: start;
+		}
+	}
+
+	@media (min-width: 1024px) {
+		.balance__grid {
+			grid-template-columns: 1.06fr 0.94fr;
+			gap: 76px;
+		}
+	}
+</style>

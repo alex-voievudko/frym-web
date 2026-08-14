@@ -1,0 +1,207 @@
+---
+import Section from '../primitives/Section.astro';
+import SectionHeader from '../primitives/SectionHeader.astro';
+import DataRow from '../primitives/DataRow.astro';
+import IconTile from '../primitives/IconTile.astro';
+import ProgressRow from '../primitives/ProgressRow.astro';
+import AllocationBar from '../primitives/AllocationBar.astro';
+import StatFigure from '../primitives/StatFigure.astro';
+import Badge from '../primitives/Badge.astro';
+import { formatEur } from '../../lib/format';
+import type { IconName } from '../primitives/Icon.astro';
+
+const commitments: { icon: IconName; label: string; meta: string; warn?: boolean; value: number }[] = [
+	{ icon: 'home', label: 'Rent', meta: 'Due in 3 days · Aug 16', warn: true, value: 820 },
+	{ icon: 'bolt', label: 'Utilities', meta: 'Monthly', value: 180 },
+	{ icon: 'card', label: 'Subscriptions', meta: '6 active', value: 300 },
+];
+
+// The artboard shows one bar in warning and two on track. Its own groceries
+// figure (320/380) is 84%, which the design system's own rule paints ochre
+// from 80% — so the sample is nudged below the threshold rather than
+// weakening the rule in ProgressRow.
+const plan = [
+	{ label: 'Groceries', spent: 290, planned: 380 },
+	{ label: 'Dining', spent: 188, planned: 190 },
+	{ label: 'Transport', spent: 69, planned: 100 },
+];
+---
+
+<Section tint="raised" labelledby="states-title" class="states">
+	<SectionHeader
+		eyebrow="Three simple states"
+		title="See where your money really stands."
+		id="states-title"
+	>
+		Frym continually updates these numbers as money comes in, commitments are
+		paid and everyday spending happens.
+	</SectionHeader>
+
+	<ul class="states__grid">
+		<li class="state rule-top">
+			<div class="state__head">
+				<span class="state__index">01 · Locked</span>
+				<span class="state__swatch" data-state="locked"></span>
+			</div>
+			<h3 class="state__title">Locked</h3>
+			<p class="state__body">
+				Money that already has an obligation — rent, bills, subscriptions and
+				other commitments you still need to pay.
+			</p>
+
+			<div class="state__viz">
+				{
+					commitments.map((c) => (
+						<DataRow
+							label={c.label}
+							meta={c.meta}
+							metaTone={c.warn ? 'warning' : 'secondary'}
+							value={formatEur(c.value)}
+							height={52}
+						>
+							<IconTile slot="lead" name={c.icon} size={30} />
+						</DataRow>
+					))
+				}
+				<DataRow label="Locked" value={formatEur(1300)} height={52} rule="none" strong />
+			</div>
+		</li>
+
+		<li class="state rule-top">
+			<div class="state__head">
+				<span class="state__index">02 · Reserved</span>
+				<span class="state__swatch" data-state="reserved"></span>
+			</div>
+			<h3 class="state__title">Reserved</h3>
+			<p class="state__body">
+				Money you intentionally keep available for everyday spending — groceries,
+				transport, dining and anything else worth planning without treating it as
+				a fixed bill.
+			</p>
+
+			<div class="state__viz state__viz--plan">
+				{plan.map((p) => <ProgressRow label={p.label} spent={p.spent} planned={p.planned} />)}
+				<DataRow label="Reserved" value={formatEur(900)} height={52} rule="none" strong />
+			</div>
+		</li>
+
+		<li class="state rule-top" data-emphasis>
+			<div class="state__head">
+				<span class="state__index state__index--ink">03 · Free</span>
+				<span class="state__swatch" data-state="free"></span>
+			</div>
+			<h3 class="state__title">Free</h3>
+			<p class="state__body">
+				Money with no current claim on it. Spend it, save it, move it or leave
+				it alone.
+			</p>
+
+			<div class="state__viz state__viz--free">
+				<AllocationBar free={1800} reserved={900} locked={1300} />
+				<div class="state__free-row">
+					<StatFigure value={1800} size="lg" />
+					<Badge tone="reserved">No claim</Badge>
+				</div>
+			</div>
+		</li>
+	</ul>
+</Section>
+
+<style>
+	.states__grid {
+		display: grid;
+		gap: 26px;
+	}
+
+	.state {
+		display: flex;
+		flex-direction: column;
+		gap: 18px;
+		padding-top: 22px;
+	}
+
+	.state__head {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: var(--s-4);
+	}
+
+	.state__index {
+		font-family: var(--font-mono);
+		font-weight: 500;
+		font-size: var(--fs-mono-label);
+		letter-spacing: 0.2em;
+		text-transform: uppercase;
+		color: var(--c-secondary);
+		line-height: 1;
+	}
+
+	.state__index--ink {
+		color: var(--c-ink);
+	}
+
+	/* 34x8 bar, not a dot — it reads as a slice of the allocation meter. */
+	.state__swatch {
+		width: 34px;
+		height: 8px;
+		flex: none;
+	}
+
+	.state__swatch[data-state='locked'] {
+		background: var(--c-locked);
+	}
+	.state__swatch[data-state='reserved'] {
+		background: var(--c-reserved);
+	}
+	.state__swatch[data-state='free'] {
+		background: var(--c-free);
+	}
+
+	.state__title {
+		font-size: var(--fs-card-title);
+		line-height: 1.3;
+		letter-spacing: -0.025em;
+	}
+
+	.state__body {
+		line-height: 1.75;
+	}
+
+	.state__viz {
+		margin-top: auto;
+		padding-top: var(--s-2);
+	}
+
+	.state__viz--plan {
+		display: flex;
+		flex-direction: column;
+		gap: var(--s-4);
+	}
+
+	.state__viz--free {
+		display: flex;
+		flex-direction: column;
+		gap: var(--s-4);
+	}
+
+	.state__free-row {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: var(--s-3);
+	}
+
+	@media (min-width: 768px) {
+		.states__grid {
+			gap: 34px;
+		}
+	}
+
+	@media (min-width: 1024px) {
+		.states__grid {
+			grid-template-columns: repeat(3, 1fr);
+			gap: 44px;
+		}
+	}
+</style>
