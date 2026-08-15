@@ -5,7 +5,7 @@ import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
-	site: 'https://frym.app',
+	site: 'https://freem.app',
 	integrations: [icon(), sitemap()],
 	fonts: [
 		{

@@ -1,15 +1,15 @@
 /** Site-wide constants. Single source for SEO, nav and footer. */
 
 export const site = {
-	name: 'Frym',
-	title: 'Frym — Know What You Can Actually Spend',
+	name: 'Freem',
+	title: 'Freem — Know What You Can Actually Spend',
 	description:
-		"Frym is a personal finance app that shows how much of your money is actually free to spend after bills, subscriptions and planned spending are accounted for.",
+		"Freem is a personal finance app that shows how much of your money is actually free to spend after bills, subscriptions and planned spending are accounted for.",
 	ogTitle: 'Know what you can actually spend.',
 	ogDescription:
-		"Your bank balance tells you what you have. Frym tells you what's actually free to spend.",
-	tagline: "Frym tells you what's actually free to spend.",
-	contactEmail: 'hello@frym.app',
+		"Your bank balance tells you what you have. Freem tells you what's actually free to spend.",
+	tagline: "Freem tells you what's actually free to spend.",
+	contactEmail: 'hello@freem.app',
 } as const;
 
 /**
@@ -19,7 +19,7 @@ export const site = {
  */
 export const navLinks = [
 	{ href: '/#how', label: 'How it works' },
-	{ href: '/#why', label: 'Why Frym' },
+	{ href: '/#why', label: 'Why Freem' },
 	{ href: '/#faq', label: 'FAQ' },
 ] as const;
 
@@ -36,7 +36,7 @@ export const footerGroups = [
 		],
 	},
 	{
-		heading: 'Frym',
+		heading: 'Freem',
 		links: [
 			{
 				href: `mailto:${site.contactEmail}`,

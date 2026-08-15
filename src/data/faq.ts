@@ -5,12 +5,12 @@ export interface FaqItem {
 
 export const faq: FaqItem[] = [
 	{
-		q: 'What is Frym?',
-		a: 'Frym is a personal finance app that shows how much of your money is actually free to spend after upcoming commitments and planned spending are accounted for.',
+		q: 'What is Freem?',
+		a: 'Freem is a personal finance app that shows how much of your money is actually free to spend after upcoming commitments and planned spending are accounted for.',
 	},
 	{
-		q: 'Is Frym a budgeting app?',
-		a: 'Not in the traditional sense. Frym lets you plan the money that needs a plan and leaves the rest Free. You do not need to assign every euro to a category.',
+		q: 'Is Freem a budgeting app?',
+		a: 'Not in the traditional sense. Freem lets you plan the money that needs a plan and leaves the rest Free. You do not need to assign every euro to a category.',
 	},
 	{
 		// The only curly quotes on the page; the artboards are straight ASCII
@@ -27,11 +27,11 @@ export const faq: FaqItem[] = [
 		a: 'Not yet. The first version is focused on individual money management. Shared household features may come later.',
 	},
 	{
-		q: 'When will Frym launch?',
-		a: 'Frym is currently in development. Join the waitlist to be notified when early access opens.',
+		q: 'When will Freem launch?',
+		a: 'Freem is currently in development. Join the waitlist to be notified when early access opens.',
 	},
 	{
-		q: 'Will Frym be free?',
-		a: 'Frym will have a free way to get started. Paid features may be introduced as the product grows.',
+		q: 'Will Freem be free?',
+		a: 'Freem will have a free way to get started. Paid features may be introduced as the product grows.',
 	},
 ];

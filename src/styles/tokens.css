@@ -1,10 +1,10 @@
 /*
- * Frym design tokens — Foundations V2.
+ * Freem design tokens — Foundations V2.
  *
  * Three tiers, per the V2 naming model:
  *   primitive  bone.200            raw values, referenced only by tier 2
  *   semantic   surface.sunken      what the colour does; the tier components use
- *   domain     money.locked        Frym's meaning layer, aliasing tier 2
+ *   domain     money.locked        Freem's meaning layer, aliasing tier 2
  *
  * CSS naming: the doc specifies camelCase dot paths and says nothing about
  * CSS, and `.` is not legal in a custom-property name. Transform is dots to
