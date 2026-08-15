@@ -28,10 +28,8 @@ const accounts = [
 	<ol class="how__grid">
 		<li class="step rule-top">
 			<span class="step__index">Step 01</span>
-			<h3 class="step__title">Add the money you actually have</h3>
-			<p class="step__body">
-				Create your accounts and enter their current balances.
-			</p>
+			<h3 class="step__title">Add your accounts</h3>
+			<p class="step__body">Start with the money you actually have.</p>
 			<div class="step__mock">
 				{
 					accounts.map((a) => (
@@ -47,11 +45,8 @@ const accounts = [
 
 		<li class="step rule-top">
 			<span class="step__index">Step 02</span>
-			<h3 class="step__title">Protect what still needs to be paid</h3>
-			<p class="step__body">
-				Add the bills, subscriptions and other commitments that are still
-				ahead. Frym marks that money as Locked.
-			</p>
+			<h3 class="step__title">Add commitments</h3>
+			<p class="step__body">Bills and subscriptions become Locked.</p>
 			<div class="step__mock">
 				<DataRow label="Rent" height={40} rule="none">
 					<IconTile slot="lead" name="home" size={30} />
@@ -62,11 +57,8 @@ const accounts = [
 
 		<li class="step rule-top">
 			<span class="step__index">Step 03</span>
-			<h3 class="step__title">Plan flexible spending</h3>
-			<p class="step__body">
-				Reserve what you want available for things like groceries, transport or
-				dining. Frym marks that money as Reserved.
-			</p>
+			<h3 class="step__title">Plan spending</h3>
+			<p class="step__body">Flexible monthly spending becomes Reserved.</p>
 			<div class="step__mock step__mock--plan">
 				<DataRow label="Groceries" height={40} rule="none">
 					<Badge tone="reserved">Reserved</Badge>
@@ -77,10 +69,9 @@ const accounts = [
 
 		<li class="step rule-top" data-emphasis>
 			<span class="step__index">Step 04</span>
-			<h3 class="step__title">See what remains</h3>
+			<h3 class="step__title">See what's Free</h3>
 			<p class="step__body">
-				Everything else becomes Free. That number updates as you spend, receive
-				income or change your plan.
+				Everything left is yours to decide what to do with.
 			</p>
 			<div class="step__mock step__mock--free">
 				<AllocationBar free={1800} reserved={900} locked={1300} height={10} />

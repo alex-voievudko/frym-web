@@ -1,3 +1,4 @@
+// UNMOUNTED — see Features.astro. Kept alongside its component.
 import type { IconName } from '../components/primitives/Icon.astro';
 
 /**

@@ -1,25 +1,23 @@
 export interface WhyItem {
 	title: string;
 	body: string;
-	emphasis?: boolean;
 }
 
+/**
+ * No `emphasis` here: unlike the other card groups, this section's artboard
+ * draws every card with the plain hairline rule.
+ */
 export const whyFrym: WhyItem[] = [
 	{
-		title: 'No need to give every euro a job',
-		body: 'Frym does not force you to allocate all your money into categories. Money without a purpose can simply remain Free.',
+		title: "Don't budget every euro",
+		body: 'Plan only the money that needs a plan. Everything else can stay Free.',
 	},
 	{
-		title: 'No need to rebuild your whole month',
-		body: "Start with today's real balances and add only what still matters.",
+		title: 'Start from today',
+		body: 'Use the balances you have now instead of rebuilding the month from day one.',
 	},
 	{
-		title: 'Planning without rigid budgeting',
-		body: 'Reserve money where planning is useful without turning every purchase into a budgeting exercise.',
-	},
-	{
-		title: 'Your most important number stays visible',
-		body: 'Frym is built around Free to Spend, not around a long list of categories.',
-		emphasis: true,
+		title: 'One number that matters',
+		body: "Free to Spend stays visible so you always know what's still uncommitted.",
 	},
 ];

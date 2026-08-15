@@ -4,12 +4,11 @@ export const site = {
 	name: 'Frym',
 	title: 'Frym — Know What You Can Actually Spend',
 	description:
-		'Frym is a personal finance app that shows how much of your money is genuinely free after bills, subscriptions and planned spending are accounted for.',
+		"Frym is a personal finance app that shows how much of your money is actually free to spend after bills, subscriptions and planned spending are accounted for.",
 	ogTitle: 'Know what you can actually spend.',
 	ogDescription:
-		'Your balance tells you how much money you have. Frym tells you how much is genuinely free.',
-	tagline:
-		'Frym helps you understand how much of your money is genuinely free to spend.',
+		"Your bank balance tells you what you have. Frym tells you what's actually free to spend.",
+	tagline: "Frym tells you what's actually free to spend.",
 	contactEmail: 'hello@frym.app',
 } as const;
 
@@ -44,7 +43,7 @@ export const footerGroups = [
 				label: 'Contact',
 				mobileHidden: false,
 			},
-			{ href: '/#waitlist', label: 'Join the waitlist', mobileHidden: true },
+			{ href: '/#waitlist', label: 'Get early access', mobileHidden: true },
 		],
 	},
 ] as const;

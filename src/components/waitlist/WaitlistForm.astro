@@ -50,9 +50,9 @@ import { site } from '../../lib/site';
 
 		<div class="wl__submit">
 			<PillButton type="submit" variant="light" size="lg" block class="wl__button">
-				<span data-wl-button-label>Join the waitlist</span>
+				<span data-wl-button-label>Get early access</span>
 			</PillButton>
-			<p class="wl__note" id="wl-hint">No spam · Early access only</p>
+			<p class="wl__note" id="wl-hint">Early access · No spam</p>
 		</div>
 	</form>
 
@@ -149,7 +149,7 @@ import { site } from '../../lib/site';
 				result = { ok: false, reason: 'network' } as const;
 			}
 
-			buttonLabel.textContent = 'Join the waitlist';
+			buttonLabel.textContent = 'Get early access';
 			submit.disabled = false;
 			submit.removeAttribute('aria-busy');
 			email.readOnly = false;

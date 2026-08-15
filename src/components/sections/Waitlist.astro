@@ -1,12 +1,6 @@
 ---
 import Section from '../primitives/Section.astro';
 import WaitlistForm from '../waitlist/WaitlistForm.astro';
-
-const benefits = [
-	'Early access when Frym is ready',
-	'Product updates',
-	'Opportunities to test features before launch',
-];
 ---
 
 <Section
@@ -18,15 +12,14 @@ const benefits = [
 >
 	<div class="waitlist__grid">
 		<div class="waitlist__copy">
-			<h2 class="waitlist__title" id="waitlist-title">Want to try Frym early?</h2>
+			<h2 class="waitlist__title" id="waitlist-title">
+				Be one of the first to try Frym.
+			</h2>
 
 			<p class="waitlist__lead">
-				We are building the first version now. Join the waitlist to get:
+				Frym is currently being built for iPhone. Join the waitlist for early
+				access and help shape the first version.
 			</p>
-
-			<ul class="waitlist__benefits">
-				{benefits.map((b) => <li class="waitlist__benefit">{b}</li>)}
-			</ul>
 		</div>
 
 		<WaitlistForm />
@@ -56,26 +49,6 @@ const benefits = [
 		font-size: var(--type-body-lg);
 		line-height: 1.7;
 		color: var(--text-bodyOnInverse);
-	}
-
-	.waitlist__benefits {
-		display: flex;
-		flex-direction: column;
-		border-top: 1px solid var(--border-onInverse-strong);
-		margin-top: var(--s-2);
-	}
-
-	.waitlist__benefit {
-		display: flex;
-		align-items: center;
-		min-height: 52px;
-		border-bottom: 1px solid var(--border-onInverse);
-		font-size: 0.8438rem; /* 13.5 */
-		color: var(--text-onInverse);
-	}
-
-	.waitlist__benefit:last-child {
-		border-bottom: none;
 	}
 
 	@media (min-width: 1200px) {

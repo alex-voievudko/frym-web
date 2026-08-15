@@ -24,16 +24,16 @@ import { navLinks, WAITLIST_ANCHOR } from '../../lib/site';
 			</nav>
 
 			{/*
-			  The mobile artboard drops the nav entirely and shortens the label.
-			  Each pill is wrapped rather than being hidden directly: PillButton's
-			  own scoped `display` rule would otherwise outrank a class applied
-			  from here.
+			  The mobile artboard drops the nav entirely and uses a smaller pill —
+			  the label itself no longer shortens. Each pill is wrapped rather than
+			  hidden directly: PillButton's own scoped `display` rule would
+			  otherwise outrank a class applied from here.
 			*/}
 			<span class="header__cta" data-at="mobile">
-				<PillButton href={WAITLIST_ANCHOR} size="sm">Join waitlist</PillButton>
+				<PillButton href={WAITLIST_ANCHOR} size="sm">Get early access</PillButton>
 			</span>
 			<span class="header__cta" data-at="wide">
-				<PillButton href={WAITLIST_ANCHOR} size="md">Join the waitlist</PillButton>
+				<PillButton href={WAITLIST_ANCHOR} size="md">Get early access</PillButton>
 			</span>
 		</div>
 	</div>

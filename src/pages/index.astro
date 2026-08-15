@@ -6,9 +6,11 @@ import ThreeStates from '../components/sections/ThreeStates.astro';
 import HowItWorks from '../components/sections/HowItWorks.astro';
 import SimpleExample from '../components/sections/SimpleExample.astro';
 import WhyFrym from '../components/sections/WhyFrym.astro';
-import Features from '../components/sections/Features.astro';
-import WhatComesNext from '../components/sections/WhatComesNext.astro';
 import Waitlist from '../components/sections/Waitlist.astro';
+
+// Features and WhatComesNext are unmounted — the 2026-08-15 artboards drop
+// both sections. The components are kept so restoring either is one import
+// away, but they still match the previous artboard, not the current one.
 import Faq from '../components/sections/Faq.astro';
 import ClosingCta from '../components/sections/ClosingCta.astro';
 ---
@@ -20,8 +22,6 @@ import ClosingCta from '../components/sections/ClosingCta.astro';
 	<HowItWorks />
 	<SimpleExample />
 	<WhyFrym />
-	<Features />
-	<WhatComesNext />
 	<Waitlist />
 	<Faq />
 	<ClosingCta />

@@ -8,7 +8,7 @@ export const validationQuestion =
 	'What is the main thing you want more clarity on with your money?';
 
 export const validationOptions: { id: ValidationOptionId; label: string }[] = [
-	{ id: 'safe-to-spend', label: 'How much I can safely spend' },
+	{ id: 'safe-to-spend', label: 'How much I can actually spend' },
 	{ id: 'bills-subscriptions', label: 'Upcoming bills and subscriptions' },
 	{ id: 'monthly-planning', label: 'Planning monthly spending' },
 	{ id: 'where-money-goes', label: 'Where my money goes' },

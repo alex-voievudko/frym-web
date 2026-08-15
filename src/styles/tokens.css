@@ -170,7 +170,7 @@
 	--type-marketing-h2: clamp(1.8125rem, 1.4179rem + 1.619vw, 2.875rem); /* 29 → 46 */
 	--type-marketing-h2-waitlist: clamp(2rem, 1.5357rem + 1.9048vw, 3.25rem); /* 32 → 52 */
 	--type-marketing-h2-cta: clamp(2rem, 1.2571rem + 3.0476vw, 4rem); /* 32 → 64 */
-	--type-marketing-h2-sm: clamp(1.5rem, 1.2679rem + 0.9524vw, 2.125rem); /* 24 → 34 */
+	--type-marketing-h2-sm: clamp(1.5rem, 1.2679rem + 0.9524vw, 2.125rem); /* 24 → 34 · pull quote */
 	--type-marketing-lead: clamp(1rem, 0.9071rem + 0.381vw, 1.25rem); /* 16 → 20 */
 	--type-marketing-eyebrow: 0.75rem; /* 12 · .22em (.2em at mobile) */
 	--type-marketing-figure-xl: clamp(3.5rem, 2.85rem + 2.6667vw, 5.25rem); /* 56 → 84 */

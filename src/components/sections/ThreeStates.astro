@@ -25,8 +25,8 @@ const plan = [
 
 <Section tint="raised" labelledby="states-title" class="states">
 	<SectionHeader
-		eyebrow="Three simple states"
-		title="See where your money really stands."
+		eyebrow="The Frym model"
+		title="Every euro is either Locked, Reserved or Free."
 		id="states-title"
 	>
 		Frym continually updates these numbers as money comes in, commitments are
@@ -34,15 +34,18 @@ const plan = [
 	</SectionHeader>
 
 	<ul class="states__grid">
-		<li class="state rule-top">
+		{/*
+		  Every card carries the ink rule in this section — the emphasis pattern
+		  used elsewhere to single one item out does not apply here.
+		*/}
+		<li class="state rule-top" data-emphasis>
 			<div class="state__head">
 				<span class="state__index">01 · Locked</span>
 				<span class="state__swatch" data-state="locked"></span>
 			</div>
-			<h3 class="state__title">Locked</h3>
+			<h3 class="state__title">Money already spoken for.</h3>
 			<p class="state__body">
-				Money that already has an obligation — rent, bills, subscriptions and
-				other commitments you still need to pay.
+				Rent, bills, subscriptions and other upcoming commitments.
 			</p>
 
 			<div class="state__viz">
@@ -63,16 +66,14 @@ const plan = [
 			</div>
 		</li>
 
-		<li class="state rule-top">
+		<li class="state rule-top" data-emphasis>
 			<div class="state__head">
 				<span class="state__index">02 · Reserved</span>
 				<span class="state__swatch" data-state="reserved"></span>
 			</div>
-			<h3 class="state__title">Reserved</h3>
+			<h3 class="state__title">Money you've planned to spend.</h3>
 			<p class="state__body">
-				Money you intentionally keep available for everyday spending — groceries,
-				transport, dining and anything else worth planning without treating it as
-				a fixed bill.
+				Groceries, transport, dining or anything else you want to keep room for.
 			</p>
 
 			<div class="state__viz state__viz--plan">
@@ -86,11 +87,8 @@ const plan = [
 				<span class="state__index state__index--ink">03 · Free</span>
 				<span class="state__swatch" data-state="free"></span>
 			</div>
-			<h3 class="state__title">Free</h3>
-			<p class="state__body">
-				Money with no current claim on it. Spend it, save it, move it or leave
-				it alone.
-			</p>
+			<h3 class="state__title">Money with no current claim on it.</h3>
+			<p class="state__body">Spend it, save it, move it or leave it alone.</p>
 
 			<div class="state__viz state__viz--free">
 				<AllocationBar free={1800} reserved={900} locked={1300} />

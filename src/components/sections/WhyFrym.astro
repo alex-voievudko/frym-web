@@ -14,7 +14,7 @@ import { whyFrym } from '../../data/why-frym';
 	<ul class="why__grid">
 		{
 			whyFrym.map((item) => (
-				<li class="why__item rule-top" data-emphasis={item.emphasis || undefined}>
+				<li class="why__item rule-top">
 					<h3 class="why__title">{item.title}</h3>
 					<p class="why__body">{item.body}</p>
 				</li>
@@ -46,16 +46,18 @@ import { whyFrym } from '../../data/why-frym';
 		line-height: 1.75;
 	}
 
+	/* Three cards now, so this is a single 3-up row from tablet — the old
+	   2x2 no longer exists at any width. */
 	@media (min-width: 768px) {
 		.why__grid {
-			grid-template-columns: 1fr 1fr;
-			gap: 34px 48px;
+			grid-template-columns: repeat(3, 1fr);
+			gap: 34px;
 		}
 	}
 
 	@media (min-width: 1200px) {
 		.why__grid {
-			gap: 44px 76px;
+			gap: 44px;
 		}
 	}
 </style>

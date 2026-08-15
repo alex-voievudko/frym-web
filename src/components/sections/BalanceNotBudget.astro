@@ -22,20 +22,18 @@ const ledger = [
 <Section labelledby="balance-title" class="balance">
 	<div class="balance__grid">
 		<SectionHeader
-			eyebrow="Your balance is not your budget"
+			eyebrow="Your balance isn't your spendable money"
 			title="Having €4,000 does not mean you have €4,000 to spend."
 			id="balance-title"
 		/>
 
 		<div class="balance__body">
 			<p class="balance__prose">
-				Some of that money already belongs to rent. Some is needed for bills.
-				Some is what you planned for groceries, transport or dining. The problem
-				is that your bank account still shows all of it as one balance.
+				Some of that money already belongs to rent, bills and subscriptions.
+				Some of it you've planned for groceries, transport or going out.
 			</p>
 			<p class="balance__prose balance__prose--strong">
-				Frym separates what is already spoken for from what is actually yours
-				to use.
+				Your bank still shows all of it as one balance. Frym doesn't.
 			</p>
 
 			<div class="balance__ledger">
@@ -50,7 +48,7 @@ const ledger = [
 						/>
 					))
 				}
-				<DataRow label="Genuinely free" height={60} rule="none" strong>
+				<DataRow label="Free to spend" height={60} rule="none" strong>
 					<StatFigure value={1800} size="lg" />
 				</DataRow>
 			</div>
