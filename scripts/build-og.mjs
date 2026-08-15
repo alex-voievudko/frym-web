@@ -82,7 +82,7 @@ const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" 
     <rect x="${PAD}" y="${PAD}" width="${M}" height="${M}" fill="#141718"/>
     <rect x="${PAD}" y="${PAD + M - M * 0.3 - M * 0.077}" width="${M}" height="${M * 0.077}" fill="#AAB5A4"/>
   </g>
-  <text x="${PAD + M + 16}" y="${PAD + 38}" font-family="${SANS}" font-weight="700" font-size="42" letter-spacing="-2" fill="#141718">Freem</text>
+  <text x="${PAD + M + 16}" y="${PAD + 38}" font-family="${SANS}" font-weight="700" font-size="42" letter-spacing="-2" fill="#141718">freem</text>
 
   <text x="${PAD}" y="260" font-family="${SANS}" font-weight="600" font-size="74" letter-spacing="-3.7" fill="#141718">Know what you can</text>
   <text x="${PAD}" y="336" font-family="${SANS}" font-weight="600" font-size="74" letter-spacing="-3.7" fill="#141718">actually spend.</text>
