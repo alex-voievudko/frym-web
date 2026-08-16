@@ -46,9 +46,17 @@ const accounts = [
 		<li class="step rule-top">
 			<span class="step__index">Step 02</span>
 			<h3 class="step__title">Add commitments</h3>
-			<p class="step__body">Bills and subscriptions become Locked.</p>
+			<p class="step__body">
+				Bills, subscriptions and upcoming payments become Locked.
+			</p>
 			<div class="step__mock">
-				<DataRow label="Rent" height={40} rule="none">
+				<DataRow
+					label="Rent"
+					meta="Due in 3 days"
+					metaTone="warning"
+					height={40}
+					rule="none"
+				>
 					<IconTile slot="lead" name="home" size={30} />
 					<Badge tone="neutral">Locked</Badge>
 				</DataRow>
@@ -58,10 +66,12 @@ const accounts = [
 		<li class="step rule-top">
 			<span class="step__index">Step 03</span>
 			<h3 class="step__title">Plan spending</h3>
-			<p class="step__body">Flexible monthly spending becomes Reserved.</p>
+			<p class="step__body">
+				Money you intend to use for everyday spending becomes Planned.
+			</p>
 			<div class="step__mock step__mock--plan">
 				<DataRow label="Groceries" height={40} rule="none">
-					<Badge tone="reserved">Reserved</Badge>
+					<Badge tone="reserved">Planned</Badge>
 				</DataRow>
 				<ProgressRow label="Groceries" spent={320} planned={380} />
 			</div>

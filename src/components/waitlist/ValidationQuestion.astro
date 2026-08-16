@@ -12,7 +12,10 @@ import {
 ---
 
 <div class="vq" data-vq hidden>
-	<h4 class="vq__label" id="vq-label">{validationQuestion}</h4>
+	<div class="vq__head">
+		<p class="vq__eyebrow">One quick question</p>
+		<h4 class="vq__label" id="vq-label">{validationQuestion}</h4>
+	</div>
 
 	<ul class="vq__options" aria-labelledby="vq-label" data-vq-options>
 		{
@@ -50,6 +53,23 @@ import {
 		border-top: 1px solid var(--border-onInverse-strong);
 		padding-top: var(--s-5);
 		margin-top: var(--s-5);
+	}
+
+	/* Tighter than the block's own gap — the eyebrow belongs to the question. */
+	.vq__head {
+		display: flex;
+		flex-direction: column;
+		gap: 10px;
+	}
+
+	.vq__eyebrow {
+		font-family: var(--font-mono);
+		font-weight: 500;
+		font-size: var(--mono-action);
+		letter-spacing: 0.16em;
+		text-transform: uppercase;
+		color: var(--text-muted);
+		line-height: 1;
 	}
 
 	.vq__label {

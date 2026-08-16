@@ -2,7 +2,7 @@
 import { percentOf } from '../../lib/format';
 
 /**
- * The stacked Free / Reserved / Locked meter — the product's signature
+ * The stacked Free / Planned / Locked meter — the product's signature
  * visual. Three solid segments with a 2px gap and square corners, per the
  * design system's meter spec.
  */
@@ -20,7 +20,9 @@ const { free, reserved, locked, height = 14, class: className } = Astro.props;
 const total = free + reserved + locked;
 const segments = [
 	{ key: 'free', label: 'Free', value: free },
-	{ key: 'reserved', label: 'Reserved', value: reserved },
+	// `key` drives --money-reserved, which the mobile app shares; `label` is
+	// what a screen reader announces, so it follows the on-screen wording.
+	{ key: 'reserved', label: 'Planned', value: reserved },
 	{ key: 'locked', label: 'Locked', value: locked },
 ] as const;
 

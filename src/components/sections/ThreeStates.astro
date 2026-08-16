@@ -26,7 +26,7 @@ const plan = [
 <Section tint="raised" labelledby="states-title" class="states">
 	<SectionHeader
 		eyebrow="The Freem model"
-		title="Every euro is either Locked, Reserved or Free."
+		title="See what's committed, what's planned, and what's Free."
 		id="states-title"
 	>
 		Freem continually updates these numbers as money comes in, commitments are
@@ -43,9 +43,10 @@ const plan = [
 				<span class="state__index">01 · Locked</span>
 				<span class="state__swatch" data-state="locked"></span>
 			</div>
-			<h3 class="state__title">Money already spoken for.</h3>
+			<h3 class="state__title">Money already committed.</h3>
 			<p class="state__body">
-				Rent, bills, subscriptions and other upcoming commitments.
+				Rent, bills, subscriptions and other upcoming payments you still need
+				to make.
 			</p>
 
 			<div class="state__viz">
@@ -68,17 +69,17 @@ const plan = [
 
 		<li class="state rule-top" data-emphasis>
 			<div class="state__head">
-				<span class="state__index">02 · Reserved</span>
+				<span class="state__index">02 · Planned</span>
 				<span class="state__swatch" data-state="reserved"></span>
 			</div>
-			<h3 class="state__title">Money you've planned to spend.</h3>
+			<h3 class="state__title">Money you intend to spend.</h3>
 			<p class="state__body">
-				Groceries, transport, dining or anything else you want to keep room for.
+				Groceries, transport, dining or anything else you want to make room for.
 			</p>
 
 			<div class="state__viz state__viz--plan">
 				{plan.map((p) => <ProgressRow label={p.label} spent={p.spent} planned={p.planned} />)}
-				<DataRow label="Reserved" value={formatEur(900)} height={52} rule="none" strong />
+				<DataRow label="Planned" value={formatEur(900)} height={52} rule="none" strong />
 			</div>
 		</li>
 

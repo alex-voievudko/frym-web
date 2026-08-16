@@ -18,6 +18,6 @@ export const whyFrym: WhyItem[] = [
 	},
 	{
 		title: 'One number that matters',
-		body: "Free to Spend stays visible so you always know what's still uncommitted.",
+		body: "Your Free to Spend amount stays visible so you always know what's still uncommitted.",
 	},
 ];

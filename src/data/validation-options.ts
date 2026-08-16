@@ -9,7 +9,7 @@ export const validationQuestion =
 
 export const validationOptions: { id: ValidationOptionId; label: string }[] = [
 	{ id: 'safe-to-spend', label: 'How much I can actually spend' },
-	{ id: 'bills-subscriptions', label: 'Upcoming bills and subscriptions' },
+	{ id: 'bills-subscriptions', label: 'Upcoming bills & subscriptions' },
 	{ id: 'monthly-planning', label: 'Planning monthly spending' },
 	{ id: 'where-money-goes', label: 'Where my money goes' },
 	{ id: 'partner', label: 'Managing money with my partner' },

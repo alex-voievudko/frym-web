@@ -19,8 +19,10 @@ const legend = [
 		value: LOCKED,
 	},
 	{
+		// `state` stays `reserved`: it keys the --money-reserved design token,
+		// which is shared with the mobile app. Only the label is renamed.
 		state: 'reserved',
-		title: 'Reserved',
+		title: 'Planned',
 		meta: 'Planned spending',
 		value: RESERVED,
 	},
@@ -41,8 +43,8 @@ const legend = [
 			*/}
 			<p class="hero__lead">
 				Your bank balance tells you what you have.{' '}
-				<strong>Freem tells you what's actually free to spend</strong> after
-				bills, subscriptions and planned spending are accounted for.
+				<strong>Freem shows you what's free to spend</strong> after bills,
+				subscriptions and planned spending are accounted for.
 			</p>
 
 			<div class="hero__cta">

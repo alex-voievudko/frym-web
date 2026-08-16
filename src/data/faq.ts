@@ -16,7 +16,7 @@ export const faq: FaqItem[] = [
 		// The only curly quotes on the page; the artboards are straight ASCII
 		// apostrophes everywhere else.
 		q: 'What does “Free” mean?',
-		a: 'Free is the money you currently have that is not Locked for commitments or Reserved for planned spending.',
+		a: 'Free is the money left after Locked commitments and Planned spending are accounted for. It has no current claim on it, so you can spend it, save it, move it or leave it alone.',
 	},
 	{
 		q: 'Do I need to connect my bank?',

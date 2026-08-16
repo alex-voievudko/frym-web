@@ -9,8 +9,11 @@ import type { IconName } from '../primitives/Icon.astro';
 
 /**
  * Three snapshots of the same money. The point of the middle column is that
- * Free does not move — the spend came out of Reserved, where it was already
+ * Free does not move — the spend came out of Planned, where it was already
  * accounted for.
+ *
+ * `tone: 'reserved'` keys the --money-reserved token, which the design system
+ * shares with the mobile app; only the visible label reads "Planned".
  */
 interface Scenario {
 	state: string;
@@ -29,7 +32,7 @@ const scenarios: Scenario[] = [
 		rows: [
 			{ label: 'Total cash', value: 622.25 },
 			{ label: 'Locked', value: 90 },
-			{ label: 'Reserved', value: 180 },
+			{ label: 'Planned', value: 180 },
 		],
 		free: 352.25,
 		caption: 'Where the month stands right now.',
@@ -41,7 +44,7 @@ const scenarios: Scenario[] = [
 		rows: [
 			{ label: 'Total cash', value: 582.25 },
 			{ label: 'Locked', value: 90 },
-			{ label: 'Reserved', value: 140, tone: 'reserved' },
+			{ label: 'Planned', value: 140, tone: 'reserved' },
 		],
 		free: 352.25,
 		txn: {
@@ -51,7 +54,8 @@ const scenarios: Scenario[] = [
 			tone: 'reserved',
 			value: -40,
 		},
-		caption: 'Free stays the same, because the groceries were already Reserved.',
+		caption:
+			'Free stays the same because that spending was already part of your plan.',
 	},
 	{
 		state: '−€30 unplanned',
@@ -59,7 +63,7 @@ const scenarios: Scenario[] = [
 		rows: [
 			{ label: 'Total cash', value: 552.25 },
 			{ label: 'Locked', value: 90 },
-			{ label: 'Reserved', value: 140 },
+			{ label: 'Planned', value: 140 },
 		],
 		free: 322.25,
 		txn: {
@@ -165,7 +169,7 @@ const scenarios: Scenario[] = [
 		line-height: 1.3;
 	}
 
-	/* The row that absorbed the spend picks up the Reserved green. */
+	/* The row that absorbed the spend picks up the Planned green. */
 	.scenario__ledger :global(.is-reserved .row__amount) {
 		color: var(--text-accent);
 	}
