@@ -4,17 +4,26 @@ import PillButton from '../primitives/PillButton.astro';
 import { WAITLIST_ANCHOR } from '../../lib/site';
 ---
 
+{/*
+  The stack lives on a wrapper this component owns, not on Section's
+  .container. A scoped rule cannot reach into a child component's element:
+  the container carries Section's scope id, so `.closing :global(.container)`
+  compiled fine and matched nothing, leaving the heading, lead and button
+  with no spacing at all.
+*/}
 <Section pad="cta" labelledby="closing-title" class="closing">
-	<h2 class="closing__title" id="closing-title">
-		Your balance tells you what you have.
-		<span class="closing__muted">Freem tells you what's Free.</span>
-	</h2>
+	<div class="closing__stack">
+		<h2 class="closing__title" id="closing-title">
+			Your balance tells you what you have.
+			<span class="closing__muted">Freem tells you what's Free.</span>
+		</h2>
 
-	<p class="closing__lead">
-		See what your money is really available for. Get early access to Freem.
-	</p>
+		<p class="closing__lead">
+			See what your money is really available for. Get early access to Freem.
+		</p>
 
-	<PillButton href={WAITLIST_ANCHOR} size="lg" block>Get early access</PillButton>
+		<PillButton href={WAITLIST_ANCHOR} size="lg" block>Get early access</PillButton>
+	</div>
 </Section>
 
 <style>
@@ -22,11 +31,12 @@ import { WAITLIST_ANCHOR } from '../../lib/site';
 		border-top: 1px solid var(--border-default);
 	}
 
-	.closing :global(.container) {
+	/* 22 / 30 / 40 are the artboards' own gaps, not steps off the 4pt scale. */
+	.closing__stack {
 		display: flex;
 		flex-direction: column;
 		align-items: flex-start;
-		gap: var(--s-6);
+		gap: 22px;
 	}
 
 	.closing__title {
@@ -49,8 +59,8 @@ import { WAITLIST_ANCHOR } from '../../lib/site';
 	}
 
 	@media (min-width: 768px) {
-		.closing :global(.container) {
-			gap: var(--s-7);
+		.closing__stack {
+			gap: 30px;
 		}
 	}
 </style>

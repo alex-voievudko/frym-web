@@ -31,9 +31,18 @@ const accounts = [
 			<h3 class="step__title">Add your accounts</h3>
 			<p class="step__body">Start with the money you actually have.</p>
 			<div class="step__mock">
+				{/*
+				  The last row is borderless: in the artboard the list is closed by
+				  the step's own rule, not by a divider under the final account.
+				*/}
 				{
-					accounts.map((a) => (
-						<DataRow label={a.name} value={formatEur(a.value)} height={40}>
+					accounts.map((a, i) => (
+						<DataRow
+							label={a.name}
+							value={formatEur(a.value)}
+							height={40}
+							rule={i === accounts.length - 1 ? 'none' : 'soft'}
+						>
 							<span slot="lead" class="avatar" data-ground={a.ground}>
 								{a.initials}
 							</span>
